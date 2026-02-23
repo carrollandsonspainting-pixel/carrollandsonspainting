@@ -180,7 +180,6 @@
             background-position: center;
         }
 
-        /* Replace these with your actual photos */
         .service-card:nth-child(1) .service-img {
             background-image: url('images/interior-painting.jpeg');
         }
@@ -200,6 +199,83 @@
         .service-card p {
             padding: 0 1rem 1.5rem;
             color: #555;
+        }
+
+        /* ===== BEFORE & AFTER ===== */
+        .before-after {
+            padding: 4rem 0;
+            background-color: var(--white);
+        }
+
+        .ba-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .ba-pair {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            background-color: var(--light-gray);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--orange);
+        }
+
+        .ba-image {
+            position: relative;
+        }
+
+        .ba-label {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: var(--black);
+            color: var(--white);
+            padding: 0.3rem 1rem;
+            font-weight: bold;
+            font-size: 0.8rem;
+            border-radius: 4px;
+            z-index: 2;
+            border-left: 3px solid var(--orange);
+        }
+
+        .after-label {
+            left: auto;
+            right: 10px;
+            background-color: var(--green);
+            border-left: none;
+            border-right: 3px solid var(--orange);
+        }
+
+        .ba-img {
+            height: 250px;
+            background-color: #ddd;
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+            border: 2px solid var(--black);
+            transition: transform 0.3s;
+        }
+
+        .ba-img:hover {
+            transform: scale(1.02);
+            border-color: var(--orange);
+        }
+
+        @media (max-width: 768px) {
+            .ba-pair {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .ba-img {
+                height: 200px;
+            }
         }
 
         /* ===== GALLERY PREVIEW ===== */
@@ -229,7 +305,6 @@
             border-color: var(--orange);
         }
 
-        /* Placeholder images — replace with your own */
         .gallery-item:nth-child(1) { background-image: url('images/gallery1.jpeg'); }
         .gallery-item:nth-child(2) { background-image: url('images/gallery2.jpeg'); }
         .gallery-item:nth-child(3) { background-image: url('images/gallery3.jpeg'); }
@@ -501,6 +576,52 @@
         </div>
     </section>
 
+    <!-- ===== BEFORE & AFTER SECTION ===== -->
+    <section class="before-after">
+        <div class="container">
+            <h2 class="section-title">REAL RESULTS</h2>
+            <p style="text-align: center; margin-bottom: 3rem; color: #555;">See the difference we make — straight from real jobs.</p>
+            
+            <div class="ba-grid">
+                <!-- PAIR 1 -->
+                <div class="ba-pair">
+                    <div class="ba-image before">
+                        <div class="ba-label">BEFORE</div>
+                        <div class="ba-img" style="background-image: url('images/before1.jpeg');"></div>
+                    </div>
+                    <div class="ba-image after">
+                        <div class="ba-label after-label">AFTER</div>
+                        <div class="ba-img" style="background-image: url('images/after1.jpeg');"></div>
+                    </div>
+                </div>
+                
+                <!-- PAIR 2 -->
+                <div class="ba-pair">
+                    <div class="ba-image before">
+                        <div class="ba-label">BEFORE</div>
+                        <div class="ba-img" style="background-image: url('images/before2.jpeg');"></div>
+                    </div>
+                    <div class="ba-image after">
+                        <div class="ba-label after-label">AFTER</div>
+                        <div class="ba-img" style="background-image: url('images/after2.jpeg');"></div>
+                    </div>
+                </div>
+                
+                <!-- PAIR 3 -->
+                <div class="ba-pair">
+                    <div class="ba-image before">
+                        <div class="ba-label">BEFORE</div>
+                        <div class="ba-img" style="background-image: url('images/before3.jpeg');"></div>
+                    </div>
+                    <div class="ba-image after">
+                        <div class="ba-label after-label">AFTER</div>
+                        <div class="ba-img" style="background-image: url('images/after3.jpeg');"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="gallery" class="gallery-preview">
         <div class="container">
             <h2 class="section-title">RECENT WORK</h2>
@@ -549,7 +670,7 @@
                     <h4>GET IN TOUCH</h4>
                     <p><i>📞</i> (316) 516-8264</p>
                     <p><i>✉️</i> carrollandsonspainting@gmail.com</p>
-                    <p><i>📍</i> Serving Wichita & surrounding areas(MAIZE)</p>
+                    <p><i>📍</i> Serving Wichita & surrounding areas (MAIZE)</p>
                     <p><i>⏰</i> Mon-Fri: 10am - 6pm | Sat: 10am - 3pm</p>
                     <p><i>✅</i> Free estimates | Insured | Local</p>
                 </div>
@@ -583,7 +704,7 @@
                 <a href="#">🎨</a>
             </div>
             <p>© 2026 Carroll & Sons Painting. All rights reserved.</p>
-            <p style="margin-top: 0.5rem; font-size: 0.8rem; color: #888;">Built with pride in Wichita,KS</p>
+            <p style="margin-top: 0.5rem; font-size: 0.8rem; color: #888;">Built with pride in Wichita, KS</p>
         </div>
     </footer>
 </body>
