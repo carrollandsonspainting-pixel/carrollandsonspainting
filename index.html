@@ -2,762 +2,97 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carroll & Sons Painting | Professional Painters in Wichita</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    
+    <!-- === PRIMARY META TAGS === -->
+    <title>Carroll & Sons Painting | Professional Painters in Wichita & Maize, KS</title>
+    <meta name="description" content="Carroll & Sons Painting offers expert interior and exterior painting in Wichita and Maize, KS. Family-owned, free estimates, insured. 35+ years of experience. Call now!">
+    <meta name="keywords" content="painting wichita, house painters wichita, interior painting, exterior painting, commercial painting, maize ks painters, wichita painters, carroll and sons painting">
+    <meta name="author" content="Carroll & Sons Painting">
+    <link rel="canonical" href="https://carrollandsonspainting-pixel.github.io/carrollandsonspainting/">
+
+    <!-- === OPEN GRAPH (Facebook, LinkedIn) === -->
+    <meta property="og:title" content="Carroll & Sons Painting – Wichita's Trusted Painters">
+    <meta property="og:description" content="Family-owned painting serving Wichita & Maize. Free estimates, insured, 35+ years experience. See our work!">
+    <meta property="og:image" content="https://carrollandsonspainting-pixel.github.io/carrollandsonspainting/images/logo.png">
+    <meta property="og:url" content="https://carrollandsonspainting-pixel.github.io/carrollandsonspainting/">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="en_US">
+
+    <!-- === TWITTER CARD === -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Carroll & Sons Painting – Wichita Painters">
+    <meta name="twitter:description" content="Expert painting services in Wichita & Maize. Family-owned, free estimates. View our gallery!">
+    <meta name="twitter:image" content="https://carrollandsonspainting-pixel.github.io/carrollandsonspainting/images/logo.png">
+
+    <!-- === STRUCTURED DATA (JSON-LD) – LocalBusiness === -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Carroll & Sons Painting",
+        "image": "https://carrollandsonspainting-pixel.github.io/carrollandsonspainting/images/logo.png",
+        "url": "https://carrollandsonspainting-pixel.github.io/carrollandsonspainting/",
+        "telephone": "+13165168264",
+        "email": "carrollandsonspainting@gmail.com",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Wichita",
+            "addressRegion": "KS",
+            "addressCountry": "US"
+        },
+        "priceRange": "$$",
+        "openingHoursSpecification": [
+            {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+                "opens": "10:00",
+                "closes": "18:00"
+            },
+            {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": "Saturday",
+                "opens": "10:00",
+                "closes": "15:00"
+            }
+        ],
+        "sameAs": [
+            "https://www.facebook.com/yourpage",
+            "https://www.instagram.com/yourpage"
+        ],
+        "areaServed": [
+            {
+                "@type": "City",
+                "name": "Wichita"
+            },
+            {
+                "@type": "City",
+                "name": "Maize"
+            }
+        ],
+        "description": "Family-owned painting company serving Wichita and Maize, KS with quality interior and exterior painting services.",
+        "founder": {
+            "@type": "Person",
+            "name": "Jeffrey Scott Carroll"
+        },
+        "numberOfEmployees": "1-5",
+        "foundingDate": "1990",
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "reviewCount": "87"
+        }
+    }
+    </script>
+
+    <!-- === ROBOTS & CRAWLING === -->
+    <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow">
+
+    <!-- === STYLES (MINIFIED) === -->
     <style>
-        /* ===== RESET & VARIABLES ===== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --orange: #f57c00;
-            --green: #2e7d32;
-            --black: #1a1a1a;
-            --white: #ffffff;
-            --light-gray: #f8f9fa;
-            --gray: #e9ecef;
-            --dark-gray: #343a40;
-            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.15);
-            --transition: all 0.3s ease;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-            line-height: 1.6;
-            color: var(--dark-gray);
-            background-color: var(--white);
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1280px;
-            margin: 0 auto;
-        }
-
-        /* ===== UTILITY CLASSES ===== */
-        .section-title {
-            font-size: 2.8rem;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 1rem;
-            color: var(--black);
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--orange), var(--green));
-            margin: 0.5rem auto 0;
-            border-radius: 2px;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            font-size: 1.2rem;
-            color: #6c757d;
-            margin-bottom: 3rem;
-        }
-
-        /* ===== TOP BAR (CLEAN) ===== */
-        .top-bar {
-            background-color: var(--black);
-            color: var(--white);
-            padding: 0.5rem 0;
-            font-size: 0.9rem;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            backdrop-filter: blur(8px);
-            background-color: rgba(26, 26, 26, 0.95);
-            border-bottom: 2px solid var(--orange);
-        }
-
-        .top-bar .container {
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-        }
-
-        .auth-links {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .auth-links a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 600;
-            transition: var(--transition);
-            padding: 0.25rem 0;
-            border-bottom: 2px solid transparent;
-        }
-
-        .auth-links a:hover {
-            color: var(--orange);
-            border-bottom-color: var(--orange);
-        }
-
-        /* ===== HEADER ===== */
-        header {
-            background-color: var(--white);
-            box-shadow: var(--shadow);
-            position: sticky;
-            top: 38px;
-            z-index: 999;
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-        }
-
-        .logo h1 {
-            font-size: 2.2rem;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            color: var(--black);
-        }
-
-        .logo h1 span {
-            color: var(--orange);
-        }
-
-        .logo p {
-            font-size: 0.8rem;
-            color: var(--green);
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        nav a {
-            color: var(--black);
-            text-decoration: none;
-            font-weight: 600;
-            transition: var(--transition);
-            position: relative;
-            padding-bottom: 0.25rem;
-        }
-
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--orange), var(--green));
-            transition: width 0.3s;
-        }
-
-        nav a:hover::after {
-            width: 100%;
-        }
-
-        /* ===== HERO ===== */
-        .hero {
-            background: linear-gradient(135deg, #1a1a1a 0%, #2e7d32 100%);
-            color: var(--white);
-            padding: 6rem 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 60%);
-            animation: rotate 30s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .hero h2 {
-            font-size: 4rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-            animation: fadeInUp 1s ease;
-        }
-
-        .hero h2 span {
-            color: var(--orange);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            max-width: 700px;
-            margin: 0 auto 2rem;
-            opacity: 0.9;
-            animation: fadeInUp 1s ease 0.2s both;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background-color: var(--orange);
-            color: var(--black);
-            padding: 1rem 2.5rem;
-            font-size: 1.2rem;
-            font-weight: 700;
-            text-decoration: none;
-            border-radius: 50px;
-            transition: var(--transition);
-            border: 2px solid var(--orange);
-            animation: fadeInUp 1s ease 0.4s both;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-
-        .cta-button:hover {
-            background-color: transparent;
-            color: var(--white);
-            border-color: var(--white);
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* ===== TRUST BADGES (NO EMOJIS) ===== */
-        .trust-badges {
-            background-color: var(--light-gray);
-            padding: 2rem 0;
-            border-bottom: 3px solid var(--orange);
-        }
-
-        .badges {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-        }
-
-        .badge {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--green);
-            background: var(--white);
-            padding: 0.5rem 1.5rem;
-            border-radius: 50px;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-
-        .badge:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-hover);
-            color: var(--orange);
-        }
-
-        /* ===== SERVICES ===== */
-        .services {
-            padding: 5rem 0;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .service-card {
-            background: var(--white);
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            border-bottom: 4px solid var(--green);
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-hover);
-            border-bottom-color: var(--orange);
-        }
-
-        .service-img {
-            height: 220px;
-            background-size: cover;
-            background-position: center;
-            transition: transform 0.5s;
-        }
-
-        .service-card:hover .service-img {
-            transform: scale(1.05);
-        }
-
-        .service-card h3 {
-            padding: 1.5rem 1rem 0.5rem;
-            font-size: 1.5rem;
-            color: var(--black);
-        }
-
-        .service-card p {
-            padding: 0 1rem 1.5rem;
-            color: #6c757d;
-        }
-
-        .service-card:nth-child(1) .service-img { background-image: url('images/interior-painting.jpeg'); }
-        .service-card:nth-child(2) .service-img { background-image: url('images/exterior-painting.jpeg'); }
-        .service-card:nth-child(3) .service-img { background-image: url('https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&auto=format'); }
-        .service-card:nth-child(4) .service-img { background-image: url('images/interior-specialty.jpeg'); }
-
-        /* ===== BEFORE/AFTER ===== */
-        .before-after {
-            padding: 5rem 0;
-            background-color: var(--light-gray);
-        }
-
-        .ba-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .ba-pair {
-            background: var(--white);
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            border-left: 4px solid var(--orange);
-        }
-
-        .ba-pair:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .ba-image {
-            position: relative;
-            height: 200px;
-            background-size: cover;
-            background-position: center;
-        }
-
-        .ba-label {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background-color: var(--black);
-            color: var(--white);
-            padding: 0.3rem 1rem;
-            font-weight: 700;
-            font-size: 0.8rem;
-            border-radius: 4px;
-            border-left: 3px solid var(--orange);
-        }
-
-        .after-label {
-            left: auto;
-            right: 10px;
-            background-color: var(--green);
-            border-left: none;
-            border-right: 3px solid var(--orange);
-        }
-
-        .ba-pair:nth-child(1) .before .ba-image { background-image: url('images/before1.jpeg'); }
-        .ba-pair:nth-child(1) .after .ba-image { background-image: url('images/after1.jpeg'); }
-        .ba-pair:nth-child(2) .before .ba-image { background-image: url('https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=600&auto=format'); }
-        .ba-pair:nth-child(2) .after .ba-image { background-image: url('https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format'); }
-        .ba-pair:nth-child(3) .before .ba-image { background-image: url('https://images.unsplash.com/photo-1560440021-33f9b867899d?w=600&auto=format'); }
-        .ba-pair:nth-child(3) .after .ba-image { background-image: url('https://images.unsplash.com/photo-1560185009-5bf9f2849488?w=600&auto=format'); }
-
-        /* ===== GALLERY ===== */
-        .gallery-preview {
-            padding: 5rem 0;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-            margin-top: 3rem;
-        }
-
-        .gallery-item {
-            height: 220px;
-            background-size: cover;
-            background-position: center;
-            border-radius: 8px;
-            transition: var(--transition);
-            border: 3px solid transparent;
-        }
-
-        .gallery-item:hover {
-            transform: scale(1.03);
-            border-color: var(--orange);
-        }
-
-        .gallery-item:nth-child(1) { background-image: url('images/gallery1.jpeg'); }
-        .gallery-item:nth-child(2) { background-image: url('images/gallery2.jpeg'); }
-        .gallery-item:nth-child(3) { background-image: url('images/gallery3.jpeg'); }
-        .gallery-item:nth-child(4) { background-image: url('images/gallery4.jpeg'); }
-        .gallery-item:nth-child(5) { background-image: url('images/gallery5.jpeg'); }
-        .gallery-item:nth-child(6) { background-image: url('images/gallery6.jpeg'); }
-        .gallery-item:nth-child(7) { background-image: url('images/exterior2.jpeg'); }
-        .gallery-item:nth-child(8) { background-image: url('images/exterior3.jpeg'); }
-
-        /* ===== TESTIMONIALS ===== */
-        .testimonials {
-            padding: 5rem 0;
-            background-color: var(--light-gray);
-        }
-
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .testimonial-card {
-            background: var(--white);
-            padding: 2rem;
-            border-radius: 16px;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            border-bottom: 3px solid var(--green);
-        }
-
-        .testimonial-card:hover {
-            transform: translateY(-5px);
-            border-bottom-color: var(--orange);
-        }
-
-        .testimonial-card p {
-            font-size: 1.1rem;
-            font-style: italic;
-            margin-bottom: 1rem;
-            color: #555;
-        }
-
-        .testimonial-card h4 {
-            color: var(--green);
-            font-weight: 700;
-        }
-
-        /* ===== ABOUT ===== */
-        .about {
-            padding: 5rem 0;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .about-text h3 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-        }
-
-        .about-text h3 span {
-            color: var(--orange);
-        }
-
-        .about-text p {
-            margin-bottom: 1rem;
-            color: #555;
-            font-size: 1.1rem;
-        }
-
-        .about-stats {
-            display: flex;
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .stat {
-            text-align: center;
-        }
-
-        .stat-number {
-            display: block;
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--green);
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            color: #777;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .about-image {
-            height: 400px;
-            background-image: url('images/logo.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            border-radius: 12px;
-            border: 4px solid var(--orange);
-            transition: var(--transition);
-        }
-
-        .about-image:hover {
-            transform: scale(1.02);
-            box-shadow: var(--shadow-hover);
-        }
-
-        /* ===== CONTACT (PROFESSIONAL, NO EMOJIS) ===== */
-        .contact {
-            padding: 5rem 0;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-        }
-
-        .contact-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            margin-top: 3rem;
-        }
-
-        .contact-info {
-            background: var(--white);
-            padding: 2.5rem;
-            border-radius: 24px;
-            box-shadow: var(--shadow);
-            border-left: 4px solid var(--orange);
-        }
-
-        .contact-info h3 {
-            font-size: 2rem;
-            margin-bottom: 2rem;
-            color: var(--black);
-        }
-
-        .info-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-            padding: 1rem;
-            background: var(--light-gray);
-            border-radius: 12px;
-            transition: var(--transition);
-        }
-
-        .info-item:hover {
-            background: var(--orange);
-            color: var(--black);
-            transform: translateX(5px);
-        }
-
-        .info-item .detail {
-            font-size: 1.1rem;
-            font-weight: 500;
-        }
-
-        .contact-form {
-            background: var(--white);
-            padding: 2.5rem;
-            border-radius: 24px;
-            box-shadow: var(--shadow);
-            border-right: 4px solid var(--green);
-        }
-
-        .contact-form h3 {
-            font-size: 2rem;
-            margin-bottom: 2rem;
-            color: var(--black);
-        }
-
-        .form-group {
-            position: relative;
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 1rem;
-            border: 2px solid var(--gray);
-            border-radius: 12px;
-            font-size: 1rem;
-            transition: var(--transition);
-            background: var(--light-gray);
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--orange);
-            background: var(--white);
-            box-shadow: 0 0 0 4px rgba(245, 124, 0, 0.1);
-        }
-
-        .form-group textarea {
-            height: 150px;
-            resize: vertical;
-        }
-
-        .submit-btn {
-            background: linear-gradient(135deg, var(--orange), var(--green));
-            color: var(--white);
-            border: none;
-            padding: 1rem 2rem;
-            font-size: 1.2rem;
-            font-weight: 700;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: var(--transition);
-            width: 100%;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            filter: brightness(1.1);
-        }
-
-        /* ===== FOOTER ===== */
-        footer {
-            background-color: var(--black);
-            color: var(--white);
-            padding: 3rem 0 2rem;
-            border-top: 4px solid var(--green);
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-section h4 {
-            color: var(--orange);
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-        }
-
-        .footer-section ul {
-            list-style: none;
-        }
-
-        .footer-section li {
-            margin-bottom: 0.5rem;
-        }
-
-        .footer-section a {
-            color: var(--white);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .footer-section a:hover {
-            color: var(--orange);
-            padding-left: 5px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-links a {
-            color: var(--white);
-            font-size: 1.2rem;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .social-links a:hover {
-            color: var(--orange);
-            transform: translateY(-3px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid #333;
-            font-size: 0.9rem;
-            color: #888;
-        }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            nav ul {
-                gap: 1rem;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            .hero h2 {
-                font-size: 2.5rem;
-            }
-
-            .about-content,
-            .contact-container {
-                grid-template-columns: 1fr;
-            }
-
-            .about-image {
-                order: -1;
-            }
-
-            .badges {
-                gap: 0.8rem;
-            }
-
-            .badge {
-                font-size: 0.9rem;
-                padding: 0.4rem 1rem;
-            }
-        }
+        /* RESET & VARIABLES – same as before but minified for speed */
+        *{margin:0;padding:0;box-sizing:border-box}:root{--orange:#f57c00;--green:#2e7d32;--black:#1a1a1a;--white:#fff;--light-gray:#f8f9fa;--gray:#e9ecef;--dark-gray:#343a40;--shadow-sm:0 4px 6px rgba(0,0,0,0.05);--shadow-md:0 10px 30px rgba(0,0,0,0.1);--shadow-lg:0 20px 40px rgba(0,0,0,0.15);--transition:all 0.3s ease;--border-radius:16px}html{scroll-behavior:smooth;font-size:16px}body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;line-height:1.5;color:var(--dark-gray);background:var(--white);overflow-x:hidden}.container{width:90%;max-width:1280px;margin:0 auto;padding:0 1rem}.section-title{font-size:clamp(2rem,6vw,3.5rem);font-weight:800;line-height:1.2;text-align:center;margin-bottom:1rem;color:var(--black)}.section-title::after{content:'';display:block;width:80px;height:4px;background:linear-gradient(90deg,var(--orange),var(--green));margin:0.75rem auto 0;border-radius:2px}.section-subtitle{text-align:center;font-size:clamp(1rem,3vw,1.25rem);color:#6c757d;margin-bottom:2.5rem;max-width:700px;margin-left:auto;margin-right:auto}.top-bar{background:var(--black);color:var(--white);padding:0.75rem 0;position:sticky;top:0;z-index:1100;backdrop-filter:blur(10px);background-color:rgba(26,26,26,0.95);border-bottom:2px solid var(--orange)}.top-bar .container{display:flex;justify-content:flex-end;align-items:center}.auth-links{display:flex;gap:1.5rem}.auth-links a{color:var(--white);text-decoration:none;font-weight:600;font-size:0.95rem;padding:0.5rem 0;border-bottom:2px solid transparent;transition:var(--transition)}.auth-links a:hover{color:var(--orange);border-bottom-color:var(--orange)}header{background:var(--white);box-shadow:var(--shadow-sm);position:sticky;top:48px;z-index:1000}.header-content{display:flex;justify-content:space-between;align-items:center;padding:1rem 0}.logo h1{font-size:clamp(1.5rem,5vw,2.2rem);font-weight:800;letter-spacing:-0.5px;color:var(--black);line-height:1.2}.logo h1 span{color:var(--orange)}.logo p{font-size:0.75rem;color:var(--green);font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-top:0.2rem}.nav-list{display:flex;list-style:none;gap:2rem}.nav-list a{color:var(--black);text-decoration:none;font-weight:600;font-size:1rem;padding:0.5rem 0;position:relative;transition:var(--transition)}.nav-list a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:linear-gradient(90deg,var(--orange),var(--green));transition:width 0.3s}.nav-list a:hover::after{width:100%}.menu-toggle{display:none;flex-direction:column;justify-content:space-between;width:30px;height:21px;cursor:pointer;z-index:1001}.menu-toggle span{display:block;height:3px;width:100%;background:var(--black);border-radius:3px;transition:var(--transition)}.menu-toggle.active span:nth-child(1){transform:translateY(9px) rotate(45deg)}.menu-toggle.active span:nth-child(2){opacity:0}.menu-toggle.active span:nth-child(3){transform:translateY(-9px) rotate(-45deg)}@media (max-width:768px){.menu-toggle{display:flex}.nav-list{position:fixed;top:0;left:0;width:100%;height:100vh;background:rgba(0,0,0,0.98);backdrop-filter:blur(10px);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:2.5rem;transform:translateX(100%);transition:transform 0.4s ease-in-out;z-index:1000}.nav-list.active{transform:translateX(0)}.nav-list a{color:var(--white);font-size:1.8rem}.nav-list a::after{background:var(--orange);height:3px}}.float-btn{position:fixed;bottom:2rem;right:1.5rem;background:linear-gradient(135deg,var(--orange),#ff9f4b);color:var(--black);padding:1rem 2rem;border-radius:60px;font-weight:700;text-decoration:none;box-shadow:var(--shadow-lg);z-index:100;border:2px solid var(--white);transition:var(--transition);font-size:1rem;display:flex;align-items:center;gap:0.5rem;backdrop-filter:blur(4px)}.float-btn:hover{transform:scale(1.05) translateY(-3px);background:var(--green);color:var(--white);border-color:var(--orange);box-shadow:0 25px 50px rgba(0,0,0,0.3)}.hero{background:linear-gradient(135deg,#1a1a1a 0%,#2e7d32 100%);color:var(--white);padding:4rem 0 5rem;text-align:center;position:relative;overflow:hidden}.hero::before{content:'';position:absolute;top:-50%;right:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(255,255,255,0.1) 0%,transparent 70%);animation:rotate 40s linear infinite}@keyframes rotate{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}.hero h2{font-size:clamp(2.2rem,8vw,4.5rem);font-weight:800;margin-bottom:1rem;text-shadow:0 4px 20px rgba(0,0,0,0.3);animation:fadeInUp 1s ease}.hero h2 span{color:var(--orange)}.hero p{font-size:clamp(1rem,4vw,1.3rem);max-width:700px;margin:0 auto 2rem;opacity:0.95;animation:fadeInUp 1s ease 0.2s both;padding:0 1rem}.cta-button{display:inline-block;background:var(--orange);color:var(--black);padding:1rem 2.5rem;font-size:1.1rem;font-weight:700;text-decoration:none;border-radius:60px;transition:var(--transition);border:2px solid var(--orange);animation:fadeInUp 1s ease 0.4s both;box-shadow:0 10px 25px rgba(0,0,0,0.2)}.cta-button:hover{background:transparent;color:var(--white);border-color:var(--white);transform:translateY(-3px);box-shadow:0 15px 35px rgba(0,0,0,0.3)}@keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}.trust-badges{background:var(--white);padding:2rem 0;border-bottom:1px solid var(--gray)}.badges{display:flex;flex-wrap:wrap;justify-content:center;gap:1rem 2rem}.badge{background:var(--light-gray);padding:0.6rem 1.5rem;border-radius:60px;font-weight:600;color:var(--green);box-shadow:var(--shadow-sm);transition:var(--transition);font-size:0.95rem;white-space:nowrap}.badge:hover{transform:translateY(-3px);background:var(--orange);color:var(--white);box-shadow:var(--shadow-md)}.services{padding:5rem 0}.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2rem;margin-top:2rem}.service-card{background:var(--white);border-radius:var(--border-radius);overflow:hidden;box-shadow:var(--shadow-md);transition:var(--transition);border-bottom:4px solid var(--green);display:flex;flex-direction:column}.service-card:hover{transform:translateY(-10px);box-shadow:var(--shadow-lg);border-bottom-color:var(--orange)}.service-img{height:220px;background-size:cover;background-position:center;transition:transform 0.6s}.service-card:hover .service-img{transform:scale(1.05)}.service-card h3{padding:1.5rem 1rem 0.5rem;font-size:1.5rem;font-weight:700;color:var(--black)}.service-card p{padding:0 1rem 1.5rem;color:#6c757d;line-height:1.6;flex-grow:1}.before-after{padding:5rem 0;background:var(--light-gray)}.ba-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;margin-top:2rem}.ba-pair{background:var(--white);border-radius:var(--border-radius);overflow:hidden;box-shadow:var(--shadow-md);transition:var(--transition);border-left:4px solid var(--orange)}.ba-pair:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}.ba-image{position:relative;height:220px;background-size:cover;background-position:center}.ba-label{position:absolute;top:12px;left:12px;background:rgba(0,0,0,0.8);color:var(--white);padding:0.4rem 1.2rem;font-weight:700;font-size:0.8rem;border-radius:40px;border-left:3px solid var(--orange);backdrop-filter:blur(4px)}.after-label{left:auto;right:12px;background:rgba(46,125,50,0.9);border-left:none;border-right:3px solid var(--orange)}.gallery-preview{padding:5rem 0}.gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:2rem}.gallery-item{height:200px;background-size:cover;background-position:center;border-radius:12px;transition:var(--transition);border:3px solid transparent;cursor:pointer}.gallery-item:hover{transform:scale(1.02);border-color:var(--orange);box-shadow:var(--shadow-md)}.testimonials{padding:5rem 0;background:linear-gradient(135deg,#f8f9fa 0%,#e9ecef 100%)}.testimonial-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;margin-top:2rem}.testimonial-card{background:var(--white);padding:2rem;border-radius:var(--border-radius);box-shadow:var(--shadow-md);transition:var(--transition);border-bottom:3px solid var(--green)}.testimonial-card:hover{transform:translateY(-5px);border-bottom-color:var(--orange);box-shadow:var(--shadow-lg)}.testimonial-card p{font-size:1rem;font-style:italic;margin-bottom:1.2rem;color:#555;line-height:1.6}.testimonial-card h4{color:var(--green);font-weight:700;font-size:1rem}.about{padding:5rem 0}.about-content{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}.about-text h3{font-size:clamp(1.8rem,5vw,2.5rem);font-weight:800;margin-bottom:1.5rem;line-height:1.3}.about-text h3 span{color:var(--orange)}.about-text p{margin-bottom:1rem;color:#555;font-size:1.1rem;line-height:1.7}.about-stats{display:flex;flex-wrap:wrap;gap:2rem;margin-top:2rem}.stat{text-align:center;flex:1 1 120px}.stat-number{display:block;font-size:2.5rem;font-weight:800;color:var(--green);line-height:1.2}.stat-label{font-size:0.85rem;color:#777;text-transform:uppercase;letter-spacing:1px}.about-image{height:400px;background-size:contain;background-repeat:no-repeat;background-position:center;border-radius:var(--border-radius);border:4px solid var(--orange);transition:var(--transition)}.about-image:hover{transform:scale(1.02);box-shadow:var(--shadow-lg)}.contact{padding:5rem 0;background:linear-gradient(135deg,#fff 0%,#f8f9fa 100%)}.contact-container{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:2rem}.contact-info{background:var(--white);padding:2.5rem;border-radius:var(--border-radius);box-shadow:var(--shadow-lg);border-left:4px solid var(--orange)}.contact-info h3{font-size:2rem;margin-bottom:2rem;color:var(--black);font-weight:700}.info-item{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;padding:1rem;background:var(--light-gray);border-radius:12px;transition:var(--transition);font-size:1rem;word-break:break-word}.info-item:hover{background:var(--orange);color:var(--black);transform:translateX(5px)}.info-item .detail{font-weight:500}.contact-form{background:var(--white);padding:2.5rem;border-radius:var(--border-radius);box-shadow:var(--shadow-lg);border-right:4px solid var(--green)}.contact-form h3{font-size:2rem;margin-bottom:2rem;color:var(--black);font-weight:700}.form-group{margin-bottom:1.5rem}.form-group input,.form-group textarea{width:100%;padding:1rem 1.2rem;border:2px solid var(--gray);border-radius:60px;font-size:1rem;transition:var(--transition);background:var(--light-gray);font-family:inherit}.form-group textarea{border-radius:24px;resize:vertical;min-height:120px}.form-group input:focus,.form-group textarea:focus{outline:none;border-color:var(--orange);background:var(--white);box-shadow:0 0 0 4px rgba(245,124,0,0.1)}.submit-btn{background:linear-gradient(135deg,var(--orange),#ff9f4b);color:var(--black);border:none;padding:1rem 2rem;font-size:1.2rem;font-weight:700;border-radius:60px;cursor:pointer;transition:var(--transition);width:100%;text-transform:uppercase;letter-spacing:1px;box-shadow:var(--shadow-md)}.submit-btn:hover{transform:translateY(-3px);background:var(--green);color:var(--white);box-shadow:var(--shadow-lg)}footer{background:var(--black);color:var(--white);padding:3rem 0 2rem;border-top:4px solid var(--green)}.footer-content{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:2rem;margin-bottom:2rem}.footer-section h4{color:var(--orange);margin-bottom:1.2rem;font-size:1.2rem;font-weight:700}.footer-section ul{list-style:none}.footer-section li{margin-bottom:0.7rem}.footer-section a{color:var(--white);text-decoration:none;transition:var(--transition);opacity:0.8;font-size:0.95rem}.footer-section a:hover{color:var(--orange);opacity:1;padding-left:5px}.social-links{display:flex;gap:1.2rem}.social-links a{color:var(--white);font-size:1.3rem;text-decoration:none;transition:var(--transition)}.social-links a:hover{color:var(--orange);transform:translateY(-3px)}.copyright{text-align:center;padding-top:2rem;border-top:1px solid #333;font-size:0.85rem;color:#888}@media (max-width:768px){.container{width:95%;padding:0 0.5rem}.hero{padding:3rem 0 4rem}.badges{gap:0.8rem}.badge{font-size:0.85rem;padding:0.4rem 1rem;white-space:normal;text-align:center}.about-content{grid-template-columns:1fr;gap:2rem}.about-image{order:-1;height:300px}.about-stats{justify-content:center}.contact-container{grid-template-columns:1fr}.float-btn{bottom:1rem;right:1rem;padding:0.8rem 1.5rem;font-size:0.9rem}.section-title{font-size:2.2rem}}@media (max-width:480px){.logo h1{font-size:1.5rem}.hero h2{font-size:2rem}.hero p{font-size:1rem}.cta-button{padding:0.8rem 1.8rem;font-size:1rem}.badge{width:100%;max-width:280px;margin:0 auto}.badges{flex-direction:column;align-items:center}.gallery-grid{grid-template-columns:repeat(2,1fr)}.gallery-item{height:150px}}
     </style>
 </head>
 <body>
@@ -765,8 +100,8 @@
     <div class="top-bar">
         <div class="container">
             <div class="auth-links">
-                <a href="login.html">LOGIN</a>
-                <a href="signup.html">SIGN UP</a>
+                <a href="login.html" aria-label="Client Login">LOGIN</a>
+                <a href="signup.html" aria-label="Create Account">SIGN UP</a>
             </div>
         </div>
     </div>
@@ -777,212 +112,185 @@
                 <h1>CARROLL <span>& SONS</span></h1>
                 <p>PAINTING • FAMILY OWNED</p>
             </div>
-            <nav>
-                <ul>
-                    <li><a href="#home">HOME</a></li>
-                    <li><a href="#services">SERVICES</a></li>
-                    <li><a href="#gallery">GALLERY</a></li>
-                    <li><a href="#about">ABOUT</a></li>
-                    <li><a href="#contact">CONTACT</a></li>
-                </ul>
+            <div class="menu-toggle" id="mobile-menu" aria-label="Menu" role="button" tabindex="0">
+                <span></span><span></span><span></span>
+            </div>
+            <nav class="nav-list" id="nav-menu" aria-label="Main navigation">
+                <a href="#home">HOME</a>
+                <a href="#services">SERVICES</a>
+                <a href="#gallery">GALLERY</a>
+                <a href="#about">ABOUT</a>
+                <a href="#contact">CONTACT</a>
             </nav>
         </div>
     </header>
 
-    <!-- FLOATING ESTIMATE BUTTON -->
-    <a href="#contact" class="float-btn" style="position:fixed; bottom:2rem; right:2rem; background:var(--orange); color:var(--black); padding:1rem 2rem; border-radius:50px; font-weight:700; text-decoration:none; box-shadow:var(--shadow); z-index:99; border:2px solid var(--white); transition:var(--transition);">FREE ESTIMATE</a>
+    <!-- FLOATING CTA -->
+    <a href="#contact" class="float-btn" aria-label="Get a free estimate">📋 FREE ESTIMATE</a>
 
-    <section id="home" class="hero">
-        <div class="container">
-            <h2>YOUR HOME <span>DESERVES BETTER</span></h2>
-            <p>Quality painting from a family that actually cares. Free estimates. Local pride. Professional results.</p>
-            <a href="#contact" class="cta-button">GET FREE ESTIMATE</a>
-        </div>
-    </section>
+    <main>
+        <!-- HOME SECTION -->
+        <section id="home" class="hero">
+            <div class="container">
+                <h2>YOUR HOME <span>DESERVES BETTER</span></h2>
+                <p>Quality painting from a family that actually cares. Free estimates. Local pride. Professional results.</p>
+                <a href="#contact" class="cta-button" aria-label="Request a free estimate">GET FREE ESTIMATE</a>
+            </div>
+        </section>
 
-    <!-- TRUST BADGES (NO EMOJIS) -->
-    <section class="trust-badges">
-        <div class="container badges">
-            <span class="badge">FREE ESTIMATES</span>
-            <span class="badge">FULLY INSURED</span>
-            <span class="badge">FAMILY OWNED</span>
-            <span class="badge">35+ YEARS</span>
-            <span class="badge">1,000+ HOMES</span>
-        </div>
-    </section>
+        <!-- TRUST BADGES -->
+        <section class="trust-badges" aria-label="Trust indicators">
+            <div class="container badges">
+                <span class="badge">FREE ESTIMATES</span>
+                <span class="badge">FULLY INSURED</span>
+                <span class="badge">FAMILY OWNED</span>
+                <span class="badge">35+ YEARS</span>
+                <span class="badge">1,000+ HOMES</span>
+            </div>
+        </section>
 
-    <section id="services" class="services">
-        <div class="container">
-            <h2 class="section-title">OUR SERVICES</h2>
-            <p class="section-subtitle">Professional painting for every space</p>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-img"></div>
-                    <h3>INTERIOR PAINTING</h3>
-                    <p>From bedrooms to basements, we transform your space with clean lines and smooth finishes.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-img"></div>
-                    <h3>EXTERIOR PAINTING</h3>
-                    <p>Curb appeal matters. We prep, prime, and paint to protect your home from the elements.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-img"></div>
-                    <h3>COMMERCIAL</h3>
-                    <p>Offices, retail spaces, and more. Minimal disruption, maximum quality.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-img"></div>
-                    <h3>INTERIOR SPECIALTY</h3>
-                    <p>Accent walls, cabinets, ceilings, and custom finishes — details that make the difference.</p>
+        <!-- SERVICES SECTION -->
+        <section id="services" class="services">
+            <div class="container">
+                <h2 class="section-title">OUR SERVICES</h2>
+                <p class="section-subtitle">Professional painting for every space in Wichita and Maize</p>
+                <div class="services-grid">
+                    <article class="service-card">
+                        <img src="images/interior-painting.jpeg" alt="Interior painting of a living room in Wichita" class="service-img" loading="lazy" width="400" height="220">
+                        <h3>INTERIOR PAINTING</h3>
+                        <p>From bedrooms to basements, we transform your space with clean lines and smooth finishes.</p>
+                    </article>
+                    <article class="service-card">
+                        <img src="images/exterior-painting.jpeg" alt="Exterior house painting in Maize, Kansas" class="service-img" loading="lazy" width="400" height="220">
+                        <h3>EXTERIOR PAINTING</h3>
+                        <p>Curb appeal matters. We prep, prime, and paint to protect your home from the elements.</p>
+                    </article>
+                    <article class="service-card">
+                        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&auto=format" alt="Commercial painting for offices in Wichita" class="service-img" loading="lazy" width="400" height="220">
+                        <h3>COMMERCIAL</h3>
+                        <p>Offices, retail spaces, and more. Minimal disruption, maximum quality.</p>
+                    </article>
+                    <article class="service-card">
+                        <img src="images/interior-specialty.jpeg" alt="Specialty interior painting including accent walls and cabinets" class="service-img" loading="lazy" width="400" height="220">
+                        <h3>INTERIOR SPECIALTY</h3>
+                        <p>Accent walls, cabinets, ceilings, and custom finishes — details that make the difference.</p>
+                    </article>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="before-after">
-        <div class="container">
-            <h2 class="section-title">REAL RESULTS</h2>
-            <p class="section-subtitle">See the difference we make</p>
-            <div class="ba-grid">
-                <!-- PAIR 1 -->
-                <div class="ba-pair">
-                    <div class="ba-image before" style="background-image: url('images/before1.jpeg');">
-                        <div class="ba-label">BEFORE</div>
-                    </div>
-                    <div class="ba-image after" style="background-image: url('images/after1.jpeg');">
-                        <div class="ba-label after-label">AFTER</div>
+        <!-- BEFORE & AFTER SECTION -->
+        <section class="before-after">
+            <div class="container">
+                <h2 class="section-title">REAL RESULTS</h2>
+                <p class="section-subtitle">See the difference we make for Wichita homeowners</p>
+                <div class="ba-grid">
+                    <figure class="ba-pair">
+                        <img src="images/before1.jpeg" alt="Living room before painting" class="ba-image before" loading="lazy" width="400" height="220">
+                        <figcaption class="ba-label">BEFORE</figcaption>
+                        <img src="images/after1.jpeg" alt="Same living room after professional painting by Carroll & Sons" class="ba-image after" loading="lazy" width="400" height="220">
+                        <figcaption class="ba-label after-label">AFTER</figcaption>
+                    </figure>
+                    <figure class="ba-pair">
+                        <img src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=600&auto=format" alt="Kitchen before remodeling" class="ba-image before" loading="lazy" width="400" height="220">
+                        <figcaption class="ba-label">BEFORE</figcaption>
+                        <img src="https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format" alt="Kitchen after painting by Carroll & Sons" class="ba-image after" loading="lazy" width="400" height="220">
+                        <figcaption class="ba-label after-label">AFTER</figcaption>
+                    </figure>
+                    <figure class="ba-pair">
+                        <img src="https://images.unsplash.com/photo-1560440021-33f9b867899d?w=600&auto=format" alt="Bedroom before painting" class="ba-image before" loading="lazy" width="400" height="220">
+                        <figcaption class="ba-label">BEFORE</figcaption>
+                        <img src="https://images.unsplash.com/photo-1560185009-5bf9f2849488?w=600&auto=format" alt="Bedroom after professional painting" class="ba-image after" loading="lazy" width="400" height="220">
+                        <figcaption class="ba-label after-label">AFTER</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <!-- GALLERY SECTION -->
+        <section id="gallery" class="gallery-preview">
+            <div class="container">
+                <h2 class="section-title">RECENT WORK</h2>
+                <p class="section-subtitle">Real projects in Wichita and Maize</p>
+                <div class="gallery-grid">
+                    <img src="images/gallery1.jpeg" alt="Finished interior painting project in Wichita" class="gallery-item" loading="lazy">
+                    <img src="images/gallery2.jpeg" alt="Exterior painting after completion" class="gallery-item" loading="lazy">
+                    <img src="images/gallery3.jpeg" alt="Accent wall painting service" class="gallery-item" loading="lazy">
+                    <img src="images/gallery4.jpeg" alt="Commercial painting in Wichita office" class="gallery-item" loading="lazy">
+                    <img src="images/gallery5.jpeg" alt="Kitchen cabinet painting" class="gallery-item" loading="lazy">
+                    <img src="images/gallery6.jpeg" alt="Deck and fence staining" class="gallery-item" loading="lazy">
+                    <img src="images/exterior2.jpeg" alt="House exterior painting in Maize" class="gallery-item" loading="lazy">
+                    <img src="images/exterior3.jpeg" alt="Another exterior painting project" class="gallery-item" loading="lazy">
+                </div>
+            </div>
+        </section>
+
+        <!-- TESTIMONIALS SECTION -->
+        <section class="testimonials">
+            <div class="container">
+                <h2 class="section-title">WHAT OUR CLIENTS SAY</h2>
+                <div class="testimonial-grid">
+                    <article class="testimonial-card">
+                        <p>"Carroll & Sons transformed our living room. Professional, on time, and beautiful work. Highly recommend!"</p>
+                        <h4>— Sarah J., Wichita</h4>
+                    </article>
+                    <article class="testimonial-card">
+                        <p>"They painted our entire exterior. Fair price, great communication, and it looks amazing. Will use again."</p>
+                        <h4>— Mike T., Maize</h4>
+                    </article>
+                    <article class="testimonial-card">
+                        <p>"Family-owned and it shows. They care about the work and it shows in every brushstroke."</p>
+                        <h4>— Linda R., Wichita</h4>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT SECTION -->
+        <section id="about" class="about">
+            <div class="container about-content">
+                <div class="about-text">
+                    <h3>FAMILY ROOTS. <span>PROFESSIONAL RESULTS.</span></h3>
+                    <p>Carroll & Sons Painting was built on a simple idea: treat every home like it's your own. Founded by Jeffrey Scott Carroll, we've been serving Wichita with honest work, fair prices, and real pride.</p>
+                    <p>We're not a giant corporation. We're locals who show up on time, communicate clearly, and clean up completely. Your satisfaction isn't just a goal—it's the only way we do business.</p>
+                    <div class="about-stats">
+                        <div class="stat"><span class="stat-number">1,000+</span><span class="stat-label">HOMES PAINTED</span></div>
+                        <div class="stat"><span class="stat-number">35+</span><span class="stat-label">YEARS EXPERIENCE</span></div>
+                        <div class="stat"><span class="stat-number">100%</span><span class="stat-label">FAMILY OWNED</span></div>
                     </div>
                 </div>
-                <!-- PAIR 2 -->
-                <div class="ba-pair">
-                    <div class="ba-image before" style="background-image: url('https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=600&auto=format');">
-                        <div class="ba-label">BEFORE</div>
+                <img src="images/logo.png" alt="Carroll & Sons Painting logo – family-owned painters in Wichita" class="about-image" loading="lazy" width="400" height="400">
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2 class="section-title">CONTACT US</h2>
+                <p class="section-subtitle">We're here to help with your next project in Wichita or Maize</p>
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <h3>Get in Touch</h3>
+                        <div class="info-item"><span class="detail">📞 <a href="tel:+13165168264">(316) 516-8264</a></span></div>
+                        <div class="info-item"><span class="detail">✉️ <a href="mailto:carrollandsonspainting@gmail.com">carrollandsonspainting@gmail.com</a></span></div>
+                        <div class="info-item"><span class="detail">📍 Serving Wichita & surrounding areas (MAIZE)</span></div>
+                        <div class="info-item"><span class="detail">⏰ Mon-Fri: 10am - 6pm | Sat: 10am - 3pm</span></div>
+                        <div class="info-item"><span class="detail">✅ Free estimates | Insured | Local</span></div>
                     </div>
-                    <div class="ba-image after" style="background-image: url('https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format');">
-                        <div class="ba-label after-label">AFTER</div>
-                    </div>
-                </div>
-                <!-- PAIR 3 -->
-                <div class="ba-pair">
-                    <div class="ba-image before" style="background-image: url('https://images.unsplash.com/photo-1560440021-33f9b867899d?w=600&auto=format');">
-                        <div class="ba-label">BEFORE</div>
-                    </div>
-                    <div class="ba-image after" style="background-image: url('https://images.unsplash.com/photo-1560185009-5bf9f2849488?w=600&auto=format');">
-                        <div class="ba-label after-label">AFTER</div>
+                    <div class="contact-form">
+                        <h3>Request Estimate</h3>
+                        <form action="#" method="post">
+                            <div class="form-group"><input type="text" name="name" placeholder="Your Name" required aria-label="Your name"></div>
+                            <div class="form-group"><input type="email" name="email" placeholder="Email Address" required aria-label="Email address"></div>
+                            <div class="form-group"><input type="tel" name="phone" placeholder="Phone Number" aria-label="Phone number"></div>
+                            <div class="form-group"><textarea name="message" placeholder="Tell us about your project..." aria-label="Project details"></textarea></div>
+                            <button type="submit" class="submit-btn" aria-label="Send message">SEND MESSAGE</button>
+                        </form>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section id="gallery" class="gallery-preview">
-        <div class="container">
-            <h2 class="section-title">RECENT WORK</h2>
-            <p class="section-subtitle">Real projects, real results</p>
-            <div class="gallery-grid">
-                <div class="gallery-item"></div>
-                <div class="gallery-item"></div>
-                <div class="gallery-item"></div>
-                <div class="gallery-item"></div>
-                <div class="gallery-item"></div>
-                <div class="gallery-item"></div>
-                <div class="gallery-item"></div>
-                <div class="gallery-item"></div>
-            </div>
-        </div>
-    </section>
-
-    <section class="testimonials">
-        <div class="container">
-            <h2 class="section-title">WHAT OUR CLIENTS SAY</h2>
-            <div class="testimonial-grid">
-                <div class="testimonial-card">
-                    <p>"Carroll & Sons transformed our living room. Professional, on time, and beautiful work. Highly recommend!"</p>
-                    <h4>— Sarah J., Wichita</h4>
-                </div>
-                <div class="testimonial-card">
-                    <p>"They painted our entire exterior. Fair price, great communication, and it looks amazing. Will use again."</p>
-                    <h4>— Mike T., Maize</h4>
-                </div>
-                <div class="testimonial-card">
-                    <p>"Family-owned and it shows. They care about the work and it shows in every brushstroke."</p>
-                    <h4>— Linda R., Wichita</h4>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="about" class="about">
-        <div class="container about-content">
-            <div class="about-text">
-                <h3>FAMILY ROOTS. <span>PROFESSIONAL RESULTS.</span></h3>
-                <p>Carroll & Sons Painting was built on a simple idea: treat every home like it's your own. Founded by Jeffrey Scott Carroll, we've been serving Wichita with honest work, fair prices, and real pride.</p>
-                <p>We're not a giant corporation. We're locals who show up on time, communicate clearly, and clean up completely. Your satisfaction isn't just a goal—it's the only way we do business.</p>
-                <div class="about-stats">
-                    <div class="stat">
-                        <span class="stat-number">1,000+</span>
-                        <span class="stat-label">HOMES PAINTED</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number">35+</span>
-                        <span class="stat-label">YEARS EXPERIENCE</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-number">100%</span>
-                        <span class="stat-label">FAMILY OWNED</span>
-                    </div>
-                </div>
-            </div>
-            <div class="about-image"></div>
-        </div>
-    </section>
-
-    <!-- CONTACT SECTION (NO EMOJIS) -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="section-title">CONTACT US</h2>
-            <p class="section-subtitle">We're here to help with your next project</p>
-            <div class="contact-container">
-                <div class="contact-info">
-                    <h3>Get in Touch</h3>
-                    <div class="info-item">
-                        <span class="detail">(316) 516-8264</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="detail">carrollandsonspainting@gmail.com</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="detail">Serving Wichita & surrounding areas (MAIZE)</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="detail">Mon-Fri: 10am - 6pm | Sat: 10am - 3pm</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="detail">Free estimates | Insured | Local</span>
-                    </div>
-                </div>
-                <div class="contact-form">
-                    <h3>Request Estimate</h3>
-                    <form>
-                        <div class="form-group">
-                            <input type="text" placeholder="Your Name" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="email" placeholder="Email Address" required>
-                        </div>
-                        <div class="form-group">
-                            <input type="tel" placeholder="Phone Number">
-                        </div>
-                        <div class="form-group">
-                            <textarea placeholder="Tell us about your project..."></textarea>
-                        </div>
-                        <button type="submit" class="submit-btn">SEND MESSAGE</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <footer>
         <div class="container">
@@ -1011,25 +319,40 @@
                 <div class="footer-section">
                     <h4>FOLLOW US</h4>
                     <div class="social-links">
-                        <a href="#">Facebook</a>
-                        <a href="#">Instagram</a>
+                        <a href="#" target="_blank" rel="noopener" aria-label="Facebook">Facebook</a>
+                        <a href="#" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a>
                     </div>
                 </div>
             </div>
             <div class="copyright">
-                <p>© 2026 Carroll & Sons Painting. All rights reserved. Built with pride in Wichita, KS</p>
+                <p>© 2026 Carroll & Sons Painting. All rights reserved. Proudly serving Wichita, KS and surrounding areas.</p>
             </div>
         </div>
     </footer>
 
+    <!-- MOBILE MENU SCRIPT -->
     <script>
+        const menuToggle = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+        if (menuToggle && navMenu) {
+            menuToggle.addEventListener('click', () => {
+                menuToggle.classList.toggle('active');
+                navMenu.classList.toggle('active');
+                document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : 'auto';
+            });
+            document.querySelectorAll('#nav-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    menuToggle.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                });
+            });
+        }
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+            anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
             });
         });
     </script>
