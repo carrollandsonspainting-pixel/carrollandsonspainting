@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Dashboard | Carroll & Sons Painting</title>
+    <style>
+        :root {
+            --orange: #f57c00;
+            --green: #2e7d32;
+            --black: #1a1a1a;
+            --white: #ffffff;
+            --light-gray: #f5f5f5;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--light-gray);
+        }
+
+        .navbar {
+            background-color: var(--black);
+            color: var(--white);
+            padding: 1rem 0;
+            border-bottom: 4px solid var(--orange);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+        }
+
+        .logo span {
+            color: var(--orange);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        #userName {
+            color: var(--orange);
+            font-weight: bold;
+        }
+
+        #logoutBtn {
+            background-color: var(--orange);
+            color: var(--black);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        #logoutBtn:hover {
+            background-color: var(--green);
+            color: var(--white);
+        }
+
+        .dashboard {
+            padding: 3rem 0;
+        }
+
+        .welcome-card {
+            background-color: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            border-left: 4px solid var(--orange);
+        }
+
+        .welcome-card h2 {
+            color: var(--black);
+            margin-bottom: 0.5rem;
+        }
+
+        .welcome-card p {
+            color: #666;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background-color: var(--white);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            border-bottom: 3px solid var(--green);
+        }
+
+        .project-card h3 {
+            color: var(--orange);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-card p {
+            color: #555;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-status {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            background-color: var(--green);
+            color: var(--white);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <h1>CARROLL <span>& SONS</span> | CLIENT PORTAL</h1>
+            </div>
+            <div class="user-info">
+                <span>Welcome, <span id="userName">Loading...</span></span>
+                <button id="logoutBtn">LOGOUT</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="dashboard">
+        <div class="container">
+            <div class="welcome-card">
+                <h2>Your Project Dashboard</h2>
+                <p>View updates, photos, and invoices for your painting projects.</p>
+            </div>
+
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>Kitchen & Living Room</h3>
+                    <p>Status: <span class="project-status">In Progress</span></p>
+                    <p>Next update: March 1, 2026</p>
+                    <p>📸 <a href="#" style="color: var(--orange);">View photos</a></p>
+                </div>
+                <div class="project-card">
+                    <h3>Exterior Painting</h3>
+                    <p>Status: <span class="project-status">Scheduled</span></p>
+                    <p>Start date: March 15, 2026</p>
+                    <p>📄 <a href="#" style="color: var(--orange);">View estimate</a></p>
+                </div>
+                <div class="project-card">
+                    <h3>Master Bedroom</h3>
+                    <p>Status: <span class="project-status">Completed</span></p>
+                    <p>Finished: Feb 10, 2026</p>
+                    <p>📸 <a href="#" style="color: var(--orange);">Before/After</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Firebase Scripts - REPLACE WITH YOUR CONFIG -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDMsPxrpfMgW6p_gk4Dl40xC3JT-L8UIOg",
+            authDomain: "carroll-and-sons-painting.firebaseapp.com",
+            projectId: "carroll-and-sons-painting",
+            storageBucket: "carroll-and-sons-painting.firebasestorage.app",
+            messagingSenderId: "846048847940",
+            appId: "1:846048847940:web:7fe3575798004419803411",
+            measurementId: "G-7EP8VGF60N"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Check if user is logged in
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                document.getElementById('userName').textContent = user.displayName || user.email;
+            } else {
+                window.location.href = 'login.html'; // Redirect to login if not authenticated
+            }
+        });
+
+        // Logout
+        document.getElementById('logoutBtn').addEventListener('click', async () => {
+            await signOut(auth);
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>

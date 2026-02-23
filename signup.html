@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | Carroll & Sons Painting</title>
+    <style>
+        :root {
+            --orange: #f57c00;
+            --green: #2e7d32;
+            --black: #1a1a1a;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, var(--green), var(--black));
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .signup-container {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            width: 90%;
+            max-width: 400px;
+            border-top: 4px solid var(--orange);
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo h1 {
+            color: var(--black);
+            font-size: 2rem;
+        }
+
+        .logo h1 span {
+            color: var(--orange);
+        }
+
+        .logo p {
+            color: var(--green);
+            font-style: italic;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--black);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--orange);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--orange);
+            color: var(--black);
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn:hover {
+            background-color: var(--green);
+            color: var(--white);
+        }
+
+        .links {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .links a {
+            color: var(--green);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .links a:hover {
+            color: var(--orange);
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .back-link a {
+            color: #666;
+            text-decoration: none;
+        }
+
+        .error {
+            color: #d32f2f;
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-container">
+        <div class="logo">
+            <h1>CARROLL <span>& SONS</span></h1>
+            <p>CREATE ACCOUNT</p>
+        </div>
+        <h2>Join as a Client</h2>
+        <form id="signupForm">
+            <div class="form-group">
+                <input type="text" id="name" placeholder="Full Name" required>
+            </div>
+            <div class="form-group">
+                <input type="email" id="email" placeholder="Email Address" required>
+            </div>
+            <div class="form-group">
+                <input type="password" id="password" placeholder="Password (min 6 characters)" required>
+            </div>
+            <button type="submit" class="btn">SIGN UP</button>
+            <div id="errorMessage" class="error"></div>
+        </form>
+        <div class="links">
+            Already have an account? <a href="login.html">Log In</a>
+        </div>
+        <div class="back-link">
+            <a href="index.html">← Back to Home</a>
+        </div>
+    </div>
+
+    <!-- Firebase Scripts - REPLACE WITH YOUR CONFIG -->
+    <script type="module">
+        // 🔥 PASTE YOUR FIREBASE CONFIG HERE 🔥
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/11.5.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDMsPxrpfMgW6p_gk4Dl40xC3JT-L8UIOg",
+            authDomain: "carroll-and-sons-painting.firebaseapp.com",
+            projectId: "carroll-and-sons-painting",
+            storageBucket: "carroll-and-sons-painting.firebasestorage.app",
+            messagingSenderId: "846048847940",
+            appId: "1:846048847940:web:7fe3575798004419803411",
+            measurementId: "G-7EP8VGF60N"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Signup form handler
+        document.getElementById('signupForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const errorDiv = document.getElementById('errorMessage');
+
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                await updateProfile(userCredential.user, { displayName: name });
+                window.location.href = 'dashboard.html'; // Redirect on success
+            } catch (error) {
+                errorDiv.textContent = error.message;
+            }
+        });
+    </script>
+</body>
+</html>
