@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://carrollandsonspainting-pixel.github.io/carrollandsonspainting/sitemap.xml
