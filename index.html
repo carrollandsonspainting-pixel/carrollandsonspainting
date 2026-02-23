@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carroll & Sons Painting | Premium Painting in Wichita</title>
+    <title>Carroll & Sons Painting | Professional Painters in Wichita</title>
     <style>
         /* ===== RESET & VARIABLES ===== */
         * {
@@ -34,7 +34,6 @@
             line-height: 1.6;
             color: var(--dark-gray);
             background-color: var(--white);
-            overflow-x: hidden;
         }
 
         .container {
@@ -116,8 +115,6 @@
             position: sticky;
             top: 38px;
             z-index: 999;
-            backdrop-filter: blur(8px);
-            background-color: rgba(255, 255, 255, 0.98);
         }
 
         .header-content {
@@ -256,7 +253,7 @@
             }
         }
 
-        /* ===== TRUST BADGES ===== */
+        /* ===== TRUST BADGES (NO EMOJIS) ===== */
         .trust-badges {
             background-color: var(--light-gray);
             padding: 2rem 0;
@@ -309,7 +306,6 @@
             box-shadow: var(--shadow);
             transition: var(--transition);
             border-bottom: 4px solid var(--green);
-            cursor: pointer;
         }
 
         .service-card:hover {
@@ -340,7 +336,6 @@
             color: #6c757d;
         }
 
-        /* service images */
         .service-card:nth-child(1) .service-img { background-image: url('images/interior-painting.jpeg'); }
         .service-card:nth-child(2) .service-img { background-image: url('images/exterior-painting.jpeg'); }
         .service-card:nth-child(3) .service-img { background-image: url('https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&auto=format'); }
@@ -401,13 +396,12 @@
             border-right: 3px solid var(--orange);
         }
 
-        .ba-pair .before .ba-image {
-            background-image: url('images/before1.jpeg');
-        }
-        .ba-pair .after .ba-image {
-            background-image: url('images/after1.jpeg');
-        }
-        /* For pairs 2 and 3 we'll use stock images via inline style, but we set them in HTML later */
+        .ba-pair:nth-child(1) .before .ba-image { background-image: url('images/before1.jpeg'); }
+        .ba-pair:nth-child(1) .after .ba-image { background-image: url('images/after1.jpeg'); }
+        .ba-pair:nth-child(2) .before .ba-image { background-image: url('https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=600&auto=format'); }
+        .ba-pair:nth-child(2) .after .ba-image { background-image: url('https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format'); }
+        .ba-pair:nth-child(3) .before .ba-image { background-image: url('https://images.unsplash.com/photo-1560440021-33f9b867899d?w=600&auto=format'); }
+        .ba-pair:nth-child(3) .after .ba-image { background-image: url('https://images.unsplash.com/photo-1560185009-5bf9f2849488?w=600&auto=format'); }
 
         /* ===== GALLERY ===== */
         .gallery-preview {
@@ -551,7 +545,7 @@
             box-shadow: var(--shadow-hover);
         }
 
-        /* ===== CONTACT (REDESIGNED) ===== */
+        /* ===== CONTACT (PROFESSIONAL, NO EMOJIS) ===== */
         .contact {
             padding: 5rem 0;
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
@@ -593,12 +587,6 @@
             background: var(--orange);
             color: var(--black);
             transform: translateX(5px);
-        }
-
-        .info-item i {
-            font-size: 1.5rem;
-            width: 2rem;
-            text-align: center;
         }
 
         .info-item .detail {
@@ -717,7 +705,8 @@
 
         .social-links a {
             color: var(--white);
-            font-size: 1.5rem;
+            font-size: 1.2rem;
+            text-decoration: none;
             transition: var(--transition);
         }
 
@@ -772,7 +761,7 @@
     </style>
 </head>
 <body>
-    <!-- TOP BAR (CLEAN: ONLY LOGIN/SIGNUP) -->
+    <!-- TOP BAR -->
     <div class="top-bar">
         <div class="container">
             <div class="auth-links">
@@ -801,7 +790,7 @@
     </header>
 
     <!-- FLOATING ESTIMATE BUTTON -->
-    <a href="#contact" class="float-btn" style="position:fixed; bottom:2rem; right:2rem; background:var(--orange); color:var(--black); padding:1rem 2rem; border-radius:50px; font-weight:700; text-decoration:none; box-shadow:var(--shadow); z-index:99; border:2px solid var(--white); transition:var(--transition);">📋 FREE ESTIMATE</a>
+    <a href="#contact" class="float-btn" style="position:fixed; bottom:2rem; right:2rem; background:var(--orange); color:var(--black); padding:1rem 2rem; border-radius:50px; font-weight:700; text-decoration:none; box-shadow:var(--shadow); z-index:99; border:2px solid var(--white); transition:var(--transition);">FREE ESTIMATE</a>
 
     <section id="home" class="hero">
         <div class="container">
@@ -811,13 +800,14 @@
         </div>
     </section>
 
+    <!-- TRUST BADGES (NO EMOJIS) -->
     <section class="trust-badges">
         <div class="container badges">
-            <span class="badge">✅ FREE ESTIMATES</span>
-            <span class="badge">🛡️ FULLY INSURED</span>
-            <span class="badge">👨‍👦 FAMILY OWNED</span>
-            <span class="badge">⭐ 35+ YEARS</span>
-            <span class="badge">🏆 1000+ HOMES</span>
+            <span class="badge">FREE ESTIMATES</span>
+            <span class="badge">FULLY INSURED</span>
+            <span class="badge">FAMILY OWNED</span>
+            <span class="badge">35+ YEARS</span>
+            <span class="badge">1,000+ HOMES</span>
         </div>
     </section>
 
@@ -855,7 +845,7 @@
             <h2 class="section-title">REAL RESULTS</h2>
             <p class="section-subtitle">See the difference we make</p>
             <div class="ba-grid">
-                <!-- PAIR 1 (your real photos) -->
+                <!-- PAIR 1 -->
                 <div class="ba-pair">
                     <div class="ba-image before" style="background-image: url('images/before1.jpeg');">
                         <div class="ba-label">BEFORE</div>
@@ -864,7 +854,7 @@
                         <div class="ba-label after-label">AFTER</div>
                     </div>
                 </div>
-                <!-- PAIR 2 (stock) -->
+                <!-- PAIR 2 -->
                 <div class="ba-pair">
                     <div class="ba-image before" style="background-image: url('https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=600&auto=format');">
                         <div class="ba-label">BEFORE</div>
@@ -873,7 +863,7 @@
                         <div class="ba-label after-label">AFTER</div>
                     </div>
                 </div>
-                <!-- PAIR 3 (stock) -->
+                <!-- PAIR 3 -->
                 <div class="ba-pair">
                     <div class="ba-image before" style="background-image: url('https://images.unsplash.com/photo-1560440021-33f9b867899d?w=600&auto=format');">
                         <div class="ba-label">BEFORE</div>
@@ -931,7 +921,7 @@
                 <p>We're not a giant corporation. We're locals who show up on time, communicate clearly, and clean up completely. Your satisfaction isn't just a goal—it's the only way we do business.</p>
                 <div class="about-stats">
                     <div class="stat">
-                        <span class="stat-number">1000+</span>
+                        <span class="stat-number">1,000+</span>
                         <span class="stat-label">HOMES PAINTED</span>
                     </div>
                     <div class="stat">
@@ -948,37 +938,30 @@
         </div>
     </section>
 
-    <!-- ===== CONTACT SECTION (REDESIGNED) ===== -->
+    <!-- CONTACT SECTION (NO EMOJIS) -->
     <section id="contact" class="contact">
         <div class="container">
             <h2 class="section-title">CONTACT US</h2>
             <p class="section-subtitle">We're here to help with your next project</p>
             <div class="contact-container">
-                <!-- Left: Contact Info -->
                 <div class="contact-info">
                     <h3>Get in Touch</h3>
                     <div class="info-item">
-                        <i>📞</i>
                         <span class="detail">(316) 516-8264</span>
                     </div>
                     <div class="info-item">
-                        <i>✉️</i>
                         <span class="detail">carrollandsonspainting@gmail.com</span>
                     </div>
                     <div class="info-item">
-                        <i>📍</i>
                         <span class="detail">Serving Wichita & surrounding areas (MAIZE)</span>
                     </div>
                     <div class="info-item">
-                        <i>⏰</i>
                         <span class="detail">Mon-Fri: 10am - 6pm | Sat: 10am - 3pm</span>
                     </div>
                     <div class="info-item">
-                        <i>✅</i>
                         <span class="detail">Free estimates | Insured | Local</span>
                     </div>
                 </div>
-                <!-- Right: Contact Form -->
                 <div class="contact-form">
                     <h3>Request Estimate</h3>
                     <form>
@@ -1028,9 +1011,8 @@
                 <div class="footer-section">
                     <h4>FOLLOW US</h4>
                     <div class="social-links">
-                        <a href="#">📘</a>
-                        <a href="#">📷</a>
-                        <a href="#">🎨</a>
+                        <a href="#">Facebook</a>
+                        <a href="#">Instagram</a>
                     </div>
                 </div>
             </div>
@@ -1040,9 +1022,7 @@
         </div>
     </footer>
 
-    <!-- Smooth scroll and micro-interactions (optional) -->
     <script>
-        // Simple smooth scroll for anchor links (if any)
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1051,17 +1031,6 @@
                     target.scrollIntoView({ behavior: 'smooth' });
                 }
             });
-        });
-
-        // Sticky header background on scroll
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.backgroundColor = 'rgba(255,255,255,0.98)';
-                header.style.boxShadow = 'var(--shadow)';
-            } else {
-                header.style.backgroundColor = 'rgba(255,255,255,0.98)'; // keep consistent
-            }
         });
     </script>
 </body>
