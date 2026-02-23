@@ -157,11 +157,9 @@
             transform: scale(1.05);
         }
 
-        /* ===== HERO SECTION ===== */
+        /* ===== HERO SECTION (Solid Gradient - No Image) ===== */
         .hero {
-            background: linear-gradient(135deg, rgba(0,0,0,0.8) 0%, rgba(46,125,50,0.8) 100%), url('images/hero-bg.jpeg');
-            background-size: cover;
-            background-position: center;
+            background: linear-gradient(135deg, var(--black) 0%, var(--green) 100%);
             color: var(--white);
             padding: 6rem 0;
             text-align: center;
@@ -294,6 +292,90 @@
             color: #555;
         }
 
+        /* ===== BEFORE & AFTER SECTION ===== */
+        .before-after {
+            padding: 5rem 0;
+            background-color: var(--white);
+        }
+
+        .ba-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .ba-pair {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            background-color: var(--light-gray);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--orange);
+        }
+
+        .ba-image {
+            position: relative;
+        }
+
+        .ba-label {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: var(--black);
+            color: var(--white);
+            padding: 0.3rem 1rem;
+            font-weight: bold;
+            font-size: 0.8rem;
+            border-radius: 4px;
+            z-index: 2;
+            border-left: 3px solid var(--orange);
+        }
+
+        .after-label {
+            left: auto;
+            right: 10px;
+            background-color: var(--green);
+            border-left: none;
+            border-right: 3px solid var(--orange);
+        }
+
+        .ba-img {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+            border: 2px solid var(--black);
+            transition: transform 0.3s;
+        }
+
+        .ba-img:hover {
+            transform: scale(1.02);
+            border-color: var(--orange);
+        }
+
+        .ba-pair:nth-child(1) .before .ba-img {
+            background-image: url('images/before1.jpeg');
+        }
+        .ba-pair:nth-child(1) .after .ba-img {
+            background-image: url('images/after1.jpeg');
+        }
+        .ba-pair:nth-child(2) .before .ba-img {
+            background-image: url('https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=600&auto=format');
+        }
+        .ba-pair:nth-child(2) .after .ba-img {
+            background-image: url('https://images.unsplash.com/photo-1562259949-e8e7689d7828?w=600&auto=format');
+        }
+        .ba-pair:nth-child(3) .before .ba-img {
+            background-image: url('https://images.unsplash.com/photo-1560440021-33f9b867899d?w=600&auto=format');
+        }
+        .ba-pair:nth-child(3) .after .ba-img {
+            background-image: url('https://images.unsplash.com/photo-1560185009-5bf9f2849488?w=600&auto=format');
+        }
+
         /* ===== GALLERY PREVIEW ===== */
         .gallery-preview {
             padding: 5rem 0;
@@ -329,6 +411,24 @@
         .gallery-item:nth-child(7) { background-image: url('images/exterior2.jpeg'); }
         .gallery-item:nth-child(8) { background-image: url('images/exterior3.jpeg'); }
 
+        .btn-secondary {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.8rem 2rem;
+            background-color: var(--green);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--orange);
+            color: var(--black);
+        }
+
         /* ===== TESTIMONIALS ===== */
         .testimonials {
             padding: 5rem 0;
@@ -338,7 +438,6 @@
         .testimonial-slider {
             max-width: 800px;
             margin: 0 auto;
-            overflow: hidden;
         }
 
         .testimonial {
@@ -412,8 +511,8 @@
         }
 
         .about-image {
-            height: 450px;
-            background-image: url('images/logo.jpeg');
+            height: 400px;
+            background-image: url('images/logo.png');
             background-size: contain;
             background-repeat: no-repeat;
             background-position: center;
@@ -624,7 +723,7 @@
         <div class="container header-content">
             <div class="logo">
                 <h1>CARROLL <span>& SONS</span></h1>
-                <p>PAINTING • FAMILY OWNED • SINCE 1990</p>
+                <p>PAINTING • FAMILY OWNED</p>
             </div>
             <nav>
                 <ul>
@@ -684,6 +783,51 @@
                     <div class="service-img"></div>
                     <h3>INTERIOR SPECIALTY</h3>
                     <p>Accent walls, cabinets, ceilings, and custom finishes — details that make the difference.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BEFORE & AFTER SECTION -->
+    <section class="before-after">
+        <div class="container">
+            <h2 class="section-title">REAL RESULTS</h2>
+            <p class="section-subtitle">See the difference we make</p>
+            <div class="ba-grid">
+                <!-- PAIR 1 - Your real photos -->
+                <div class="ba-pair">
+                    <div class="ba-image before">
+                        <div class="ba-label">BEFORE</div>
+                        <div class="ba-img"></div>
+                    </div>
+                    <div class="ba-image after">
+                        <div class="ba-label after-label">AFTER</div>
+                        <div class="ba-img"></div>
+                    </div>
+                </div>
+                
+                <!-- PAIR 2 - Stock photos -->
+                <div class="ba-pair">
+                    <div class="ba-image before">
+                        <div class="ba-label">BEFORE</div>
+                        <div class="ba-img"></div>
+                    </div>
+                    <div class="ba-image after">
+                        <div class="ba-label after-label">AFTER</div>
+                        <div class="ba-img"></div>
+                    </div>
+                </div>
+                
+                <!-- PAIR 3 - Stock photos -->
+                <div class="ba-pair">
+                    <div class="ba-image before">
+                        <div class="ba-label">BEFORE</div>
+                        <div class="ba-img"></div>
+                    </div>
+                    <div class="ba-image after">
+                        <div class="ba-label after-label">AFTER</div>
+                        <div class="ba-img"></div>
+                    </div>
                 </div>
             </div>
         </div>
