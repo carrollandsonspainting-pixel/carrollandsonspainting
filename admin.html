@@ -290,7 +290,7 @@
             projectsSnap.forEach(doc => {
                 const p = doc.data();
                 const projectId = doc.id;
-                const nextUpdate = p.nextUpdate || '';
+                const nextUpdate = p.nextUpdate || '';   // empty string if not set
                 
                 projectsDiv.innerHTML += `
                     <div class="project-card">
@@ -326,11 +326,17 @@
             alert('Status updated');
         };
 
-        // ========== UPDATE NEXT UPDATE DATE ==========
+        // ========== UPDATE NEXT UPDATE DATE (NO POPUP) ==========
         window.updateNextUpdate = async function(projectId, date) {
-            const value = date || '';
+            const value = date || '';   // if empty, store empty string
             await db.collection('projects').doc(projectId).update({ nextUpdate: value });
-            alert(value ? 'Next update date set' : 'Next update cleared');
+            
+            // Optional: brief visual feedback
+            const input = event.target;
+            if (input) {
+                input.style.backgroundColor = '#d4edda';
+                setTimeout(() => input.style.backgroundColor = '', 300);
+            }
         };
 
         // ========== LOAD ALL MESSAGES ==========
