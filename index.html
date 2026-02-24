@@ -93,10 +93,53 @@
         .badge { background: var(--light-gray); padding: 0.6rem 1.2rem; border-radius: 50px; font-size: 0.9rem; font-weight: 600; color: var(--green); box-shadow: var(--shadow); white-space: nowrap; }
         @media (max-width: 480px) { .badge { white-space: normal; min-width: 140px; text-align: center; } }
 
-        /* ----- SERVICES, GALLERY, TESTIMONIALS (unchanged, keep your existing styles) ----- */
-        /* (I'll keep them minimal here for brevity, but your full CSS remains) */
+        /* ----- SERVICES SECTION ----- */
+        .services { padding: 3rem 0; }
+        .services-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+        @media (min-width: 640px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1024px) { .services-grid { grid-template-columns: repeat(4, 1fr); } }
+        .service-card { background: var(--white); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); border-bottom: 3px solid var(--green); }
+        .service-card img { width: 100%; height: 200px; object-fit: cover; display: block; }
+        .service-card h3 { padding: 1rem 1rem 0.25rem; }
+        .service-card p { padding: 0 1rem 1rem; color: #666; }
 
-        /* ----- CONTACT SECTION (UPDATED – NO FORM) ----- */
+        /* ----- BEFORE/AFTER SECTION ----- */
+        .before-after { padding: 3rem 0; background: var(--light-gray); }
+        .ba-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+        @media (min-width: 768px) { .ba-grid { grid-template-columns: repeat(3, 1fr); } }
+        .ba-pair { background: var(--white); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); border-left: 3px solid var(--orange); }
+        .ba-image { position: relative; }
+        .ba-image img { width: 100%; height: 200px; object-fit: cover; display: block; }
+        .ba-label { position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.8); color: white; padding: 0.25rem 1rem; font-size: 0.8rem; font-weight: 700; border-radius: 20px; border-left: 2px solid var(--orange); }
+        .after-label { left: auto; right: 10px; background: var(--green); border-left: none; border-right: 2px solid var(--orange); }
+
+        /* ----- GALLERY SECTION ----- */
+        .gallery-preview { padding: 3rem 0; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
+        @media (min-width: 480px) { .gallery-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (min-width: 768px) { .gallery-grid { grid-template-columns: repeat(4, 1fr); } }
+        .gallery-item { width: 100%; height: 150px; object-fit: cover; border-radius: 8px; transition: transform 0.3s; }
+        .gallery-item:hover { transform: scale(1.02); }
+
+        /* ----- TESTIMONIALS SECTION ----- */
+        .testimonials { padding: 3rem 0; background: linear-gradient(135deg, #f8f9fa, #e9ecef); }
+        .testimonial-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+        @media (min-width: 768px) { .testimonial-grid { grid-template-columns: repeat(3, 1fr); } }
+        .testimonial-card { background: var(--white); padding: 1.5rem; border-radius: var(--radius); box-shadow: var(--shadow); border-bottom: 3px solid var(--green); }
+        .testimonial-card p { font-style: italic; margin-bottom: 1rem; color: #555; }
+        .testimonial-card h4 { color: var(--green); font-size: 0.9rem; }
+
+        /* ----- ABOUT SECTION ----- */
+        .about { padding: 3rem 0; }
+        .about-content { display: grid; grid-template-columns: 1fr; gap: 2rem; }
+        @media (min-width: 768px) { .about-content { grid-template-columns: 1fr 1fr; align-items: center; } }
+        .about-stats { display: flex; flex-wrap: wrap; gap: 1.5rem; margin-top: 1.5rem; }
+        .stat { flex: 1 1 100px; text-align: center; }
+        .stat-number { display: block; font-size: 2rem; font-weight: 800; color: var(--green); }
+        .stat-label { font-size: 0.75rem; text-transform: uppercase; color: #777; }
+        .about-image { width: 100%; height: auto; max-height: 300px; object-fit: contain; border-radius: var(--radius); border: 3px solid var(--orange); }
+
+        /* ----- CONTACT SECTION (NO FORM) ----- */
         .contact { padding: 3rem 0; background: var(--light-gray); }
         .contact-container { max-width: 600px; margin: 0 auto; }
         .contact-info { background: var(--white); padding: 2rem; border-radius: var(--radius); box-shadow: var(--shadow); border-left: 4px solid var(--orange); text-align: center; }
@@ -106,9 +149,12 @@
 
         /* ----- FOOTER ----- */
         footer { background: var(--black); color: var(--white); padding: 2rem 0 1rem; border-top: 3px solid var(--green); }
-        .footer-content { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; text-align: center; }
-        @media (min-width: 640px) { .footer-content { text-align: left; } }
+        .footer-content { display: grid; grid-template-columns: 1fr; gap: 2rem; text-align: center; }
+        @media (min-width: 640px) { .footer-content { grid-template-columns: repeat(2, 1fr); text-align: left; } }
+        @media (min-width: 1024px) { .footer-content { grid-template-columns: repeat(4, 1fr); } }
         .footer-section h4 { color: var(--orange); margin-bottom: 0.75rem; }
+        .footer-section ul { list-style: none; }
+        .footer-section li { margin-bottom: 0.3rem; }
         .footer-section a { color: var(--white); text-decoration: none; opacity: 0.8; }
         .footer-section a:hover { opacity: 1; color: var(--orange); }
         .social-links { display: flex; gap: 1rem; justify-content: center; }
@@ -116,6 +162,30 @@
         .copyright { text-align: center; padding-top: 2rem; margin-top: 2rem; border-top: 1px solid #333; font-size: 0.8rem; color: #888; }
         .float-btn { position: fixed; bottom: 1rem; right: 1rem; background: var(--orange); color: var(--black); padding: 0.7rem 1.5rem; border-radius: 50px; font-weight: 700; text-decoration: none; box-shadow: 0 5px 10px rgba(0,0,0,0.2); z-index: 90; border: 2px solid white; }
         @media (min-width: 768px) { .float-btn { bottom: 2rem; right: 2rem; padding: 1rem 2rem; } }
+
+        /* Image paths – MAKE SURE THESE MATCH YOUR FILENAMES */
+        .service-card:nth-child(1) img { content: url('images/interior-painting.jpeg'); }
+        .service-card:nth-child(2) img { content: url('images/exterior-painting.jpeg'); }
+        .service-card:nth-child(3) img { content: url('images/commercial-painting.jpeg'); }
+        .service-card:nth-child(4) img { content: url('images/interior-specialty.jpeg'); }
+
+        .ba-pair:nth-child(1) .before img { content: url('images/before1.jpeg'); }
+        .ba-pair:nth-child(1) .after img { content: url('images/after1.jpeg'); }
+        .ba-pair:nth-child(2) .before img { content: url('images/before2.jpeg'); }
+        .ba-pair:nth-child(2) .after img { content: url('images/after2.jpeg'); }
+        .ba-pair:nth-child(3) .before img { content: url('images/before3.jpeg'); }
+        .ba-pair:nth-child(3) .after img { content: url('images/after3.jpeg'); }
+
+        .gallery-item:nth-child(1) { content: url('images/gallery1.jpeg'); }
+        .gallery-item:nth-child(2) { content: url('images/gallery2.jpeg'); }
+        .gallery-item:nth-child(3) { content: url('images/gallery3.jpeg'); }
+        .gallery-item:nth-child(4) { content: url('images/gallery4.jpeg'); }
+        .gallery-item:nth-child(5) { content: url('images/gallery5.jpeg'); }
+        .gallery-item:nth-child(6) { content: url('images/gallery6.jpeg'); }
+        .gallery-item:nth-child(7) { content: url('images/exterior2.jpeg'); }
+        .gallery-item:nth-child(8) { content: url('images/exterior3.jpeg'); }
+
+        .about-image { content: url('images/logo.png'); }
     </style>
 </head>
 <body>
@@ -153,7 +223,7 @@
     <a href="#contact" class="float-btn">FREE ESTIMATE</a>
 
     <main>
-        <!-- HERO SECTION -->
+        <!-- HERO -->
         <section id="home" class="hero">
             <div class="container">
                 <h1>YOUR HOME <span>DESERVES BETTER</span></h1>
@@ -173,44 +243,69 @@
             </div>
         </section>
 
-        <!-- SERVICES SECTION (keep your existing content) -->
+        <!-- SERVICES SECTION -->
         <section id="services" class="services">
             <div class="container">
                 <h2 class="section-title">OUR SERVICES</h2>
                 <p style="text-align: center; margin-bottom: 2rem;">Professional painting for every space in Wichita and Maize</p>
                 <div class="services-grid">
-                    <!-- Your service cards here – unchanged -->
+                    <div class="service-card"><img alt="Interior painting"><h3>INTERIOR PAINTING</h3><p>From bedrooms to basements, we transform your space with clean lines and smooth finishes.</p></div>
+                    <div class="service-card"><img alt="Exterior painting"><h3>EXTERIOR PAINTING</h3><p>Curb appeal matters. We prep, prime, and paint to protect your home from the elements.</p></div>
+                    <div class="service-card"><img alt="Commercial painting"><h3>COMMERCIAL</h3><p>Offices, retail spaces, and more. Minimal disruption, maximum quality.</p></div>
+                    <div class="service-card"><img alt="Specialty painting"><h3>INTERIOR SPECIALTY</h3><p>Accent walls, cabinets, ceilings, and custom finishes — details that make the difference.</p></div>
                 </div>
             </div>
         </section>
 
-        <!-- GALLERY SECTION (keep your existing content) -->
+        <!-- BEFORE & AFTER SECTION -->
+        <section class="before-after">
+            <div class="container">
+                <h2 class="section-title">REAL RESULTS</h2>
+                <p style="text-align: center; margin-bottom: 2rem;">See the difference we make for Wichita homeowners</p>
+                <div class="ba-grid">
+                    <div class="ba-pair"><div class="ba-image before"><img alt="Before"><span class="ba-label">BEFORE</span></div><div class="ba-image after"><img alt="After"><span class="ba-label after-label">AFTER</span></div></div>
+                    <div class="ba-pair"><div class="ba-image before"><img alt="Before"><span class="ba-label">BEFORE</span></div><div class="ba-image after"><img alt="After"><span class="ba-label after-label">AFTER</span></div></div>
+                    <div class="ba-pair"><div class="ba-image before"><img alt="Before"><span class="ba-label">BEFORE</span></div><div class="ba-image after"><img alt="After"><span class="ba-label after-label">AFTER</span></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GALLERY SECTION -->
         <section id="gallery" class="gallery-preview">
             <div class="container">
                 <h2 class="section-title">RECENT WORK</h2>
                 <p style="text-align: center; margin-bottom: 2rem;">Real projects in Wichita and Maize</p>
                 <div class="gallery-grid">
-                    <!-- Your gallery images here – unchanged -->
+                    <img class="gallery-item" alt="Gallery image 1">
+                    <img class="gallery-item" alt="Gallery image 2">
+                    <img class="gallery-item" alt="Gallery image 3">
+                    <img class="gallery-item" alt="Gallery image 4">
+                    <img class="gallery-item" alt="Gallery image 5">
+                    <img class="gallery-item" alt="Gallery image 6">
+                    <img class="gallery-item" alt="Exterior 2">
+                    <img class="gallery-item" alt="Exterior 3">
                 </div>
             </div>
         </section>
 
-        <!-- TESTIMONIALS SECTION (keep your existing content) -->
+        <!-- TESTIMONIALS SECTION -->
         <section class="testimonials">
             <div class="container">
                 <h2 class="section-title">WHAT OUR CLIENTS SAY</h2>
                 <div class="testimonial-grid">
-                    <!-- Your testimonials here – unchanged -->
+                    <div class="testimonial-card"><p>"Carroll & Sons transformed our living room. Professional, on time, and beautiful work. Highly recommend!"</p><h4>— Sarah J., Wichita</h4></div>
+                    <div class="testimonial-card"><p>"They painted our entire exterior. Fair price, great communication, and it looks amazing. Will use again."</p><h4>— Mike T., Maize</h4></div>
+                    <div class="testimonial-card"><p>"Family-owned and it shows. They care about the work and it shows in every brushstroke."</p><h4>— Linda R., Wichita</h4></div>
                 </div>
             </div>
         </section>
 
-        <!-- ABOUT SECTION (keep your existing content) -->
+        <!-- ABOUT SECTION -->
         <section id="about" class="about">
             <div class="container about-content">
-                <div class="about-text">
+                <div>
                     <h2>FAMILY ROOTS. <span style="color: var(--orange);">PROFESSIONAL RESULTS.</span></h2>
-                    <p>Carroll & Sons Painting was built on a simple idea: treat every home like it's your own. Founded by Jeffrey Scott Carroll, we've been serving Wichita with honest work, fair prices, and real pride.</p>
+                    <p style="margin-top: 1rem;">Carroll & Sons Painting was built on a simple idea: treat every home like it's your own. Founded by Jeffrey Scott Carroll, we've been serving Wichita with honest work, fair prices, and real pride.</p>
                     <p>We're not a giant corporation. We're locals who show up on time, communicate clearly, and clean up completely. Your satisfaction isn't just a goal—it's the only way we do business.</p>
                     <div class="about-stats">
                         <div class="stat"><span class="stat-number">1,000+</span><span class="stat-label">HOMES PAINTED</span></div>
@@ -218,11 +313,11 @@
                         <div class="stat"><span class="stat-number">100%</span><span class="stat-label">FAMILY OWNED</span></div>
                     </div>
                 </div>
-                <img src="images/logo.png" alt="Carroll & Sons Painting logo" class="about-image" loading="lazy">
+                <img class="about-image" alt="Carroll & Sons Painting logo">
             </div>
         </section>
 
-        <!-- CONTACT SECTION – UPDATED: NO REQUEST ESTIMATE FORM -->
+        <!-- CONTACT SECTION (NO FORM) -->
         <section id="contact" class="contact">
             <div class="container">
                 <h2 class="section-title">CONTACT US</h2>
@@ -244,43 +339,16 @@
     <footer>
         <div class="container">
             <div class="footer-content">
-                <div class="footer-section">
-                    <h4>CARROLL & SONS</h4>
-                    <p>Family-owned painting serving Wichita with pride.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>QUICK LINKS</h4>
-                    <ul>
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#services">Services</a></li>
-                        <li><a href="#gallery">Gallery</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>CLIENT ACCESS</h4>
-                    <ul>
-                        <li><a href="login.html">Client Login</a></li>
-                        <li><a href="signup.html">Create Account</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>FOLLOW US</h4>
-                    <div class="social-links">
-                        <a href="#">Facebook</a>
-                        <a href="#">Instagram</a>
-                    </div>
-                </div>
+                <div class="footer-section"><h4>CARROLL & SONS</h4><p>Family-owned painting serving Wichita with pride.</p></div>
+                <div class="footer-section"><h4>QUICK LINKS</h4><ul><li><a href="#home">Home</a></li><li><a href="#services">Services</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li></ul></div>
+                <div class="footer-section"><h4>CLIENT ACCESS</h4><ul><li><a href="login.html">Client Login</a></li><li><a href="signup.html">Create Account</a></li></ul></div>
+                <div class="footer-section"><h4>FOLLOW US</h4><div class="social-links"><a href="#">Facebook</a><a href="#">Instagram</a></div></div>
             </div>
-            <div class="copyright">
-                <p>© 2026 Carroll & Sons Painting. All rights reserved. Proudly serving Wichita, KS and surrounding areas.</p>
-            </div>
+            <div class="copyright"><p>© 2026 Carroll & Sons Painting. All rights reserved. Proudly serving Wichita, KS and surrounding areas.</p></div>
         </div>
     </footer>
 
     <script>
-        // Mobile menu script (keep your existing)
         const menuToggle = document.getElementById('mobile-menu');
         const navMenu = document.getElementById('nav-menu');
         if (menuToggle && navMenu) {
