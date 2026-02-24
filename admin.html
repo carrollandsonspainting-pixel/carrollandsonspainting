@@ -3,9 +3,9 @@
 <head>
     <title>Admin Panel – Carroll & Sons</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/11.5.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.5.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.5.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore-compat.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: system-ui; background: #f8f9fa; }
@@ -20,8 +20,9 @@
         .client-card, .project-card { background: #f1f3f5; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border-bottom: 2px solid #2e7d32; }
         .message { background: #f1f3f5; padding: 0.5rem; border-radius: 4px; margin-bottom: 0.5rem; }
         button { background: #2e7d32; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; margin: 0.2rem; }
-        input { padding: 0.5rem; margin: 0.5rem 0; width: 100%; }
+        input, textarea { padding: 0.5rem; margin: 0.5rem 0; width: 100%; }
         .btn-create { background: #f57c00; color: black; font-weight: bold; }
+        .reply-box { margin-top: 0.5rem; }
     </style>
 </head>
 <body>
@@ -60,74 +61,111 @@
     </div>
 
     <script src="js/firebase-config.js"></script>
-    <script src="js/auth.js"></script>
     <script>
-        // Admin functions
+        // Logout function
+        window.logout = function() {
+            auth.signOut().then(() => {
+                window.location.href = "index.html";
+            });
+        };
+
+        // Load all clients
         async function loadAllClients() {
             const usersSnap = await db.collection('users').get();
             const clientsDiv = document.getElementById('clients');
             clientsDiv.innerHTML = '';
+            if (usersSnap.empty) {
+                clientsDiv.innerHTML = '<p>No clients yet.</p>';
+            }
             usersSnap.forEach(doc => {
                 const user = doc.data();
                 clientsDiv.innerHTML += `
-                    <div class="client-card" data-id="${doc.id}">
+                    <div class="client-card">
                         <h4>${user.name}</h4>
-                        <p>${user.email}</p>
+                        <p>Email: ${user.email}</p>
+                        <p>Client ID: ${doc.id}</p>
                     </div>
                 `;
             });
         }
 
+        // Load all projects
         async function loadAllProjects() {
             const projectsSnap = await db.collection('projects').get();
             const projectsDiv = document.getElementById('allProjects');
             projectsDiv.innerHTML = '';
+            if (projectsSnap.empty) {
+                projectsDiv.innerHTML = '<p>No projects yet.</p>';
+            }
             projectsSnap.forEach(doc => {
                 const p = doc.data();
                 projectsDiv.innerHTML += `
                     <div class="project-card">
                         <h4>${p.name}</h4>
                         <p>Client ID: ${p.clientId}</p>
-                        <p>Status: <input type="text" value="${p.status}" onchange="updateStatus('${doc.id}', this.value)"></p>
-                        <p>Next update: <input type="date" value="${p.nextUpdate}" onchange="updateNextUpdate('${doc.id}', this.value)"></p>
+                        <p>Status: <input type="text" value="${p.status || 'New'}" onchange="updateStatus('${doc.id}', this.value)"></p>
+                        <p>Next update: <input type="date" value="${p.nextUpdate || ''}" onchange="updateNextUpdate('${doc.id}', this.value)"></p>
                     </div>
                 `;
             });
         }
 
-        async function updateStatus(projectId, newStatus) {
+        // Update project status
+        window.updateStatus = async function(projectId, newStatus) {
             await db.collection('projects').doc(projectId).update({ status: newStatus });
-            alert('Updated');
-        }
+            alert('Status updated');
+        };
 
-        async function updateNextUpdate(projectId, date) {
+        // Update next update date
+        window.updateNextUpdate = async function(projectId, date) {
             await db.collection('projects').doc(projectId).update({ nextUpdate: date });
-            alert('Updated');
-        }
+            alert('Next update date set');
+        };
 
+        // Load all messages
         async function loadAllMessages() {
             const msgsSnap = await db.collection('messages').orderBy('timestamp', 'desc').get();
             const msgsDiv = document.getElementById('allMessages');
             msgsDiv.innerHTML = '';
+            if (msgsSnap.empty) {
+                msgsDiv.innerHTML = '<p>No messages yet.</p>';
+            }
             msgsSnap.forEach(doc => {
                 const m = doc.data();
                 msgsDiv.innerHTML += `
-                    <div class="message">
-                        <strong>${m.clientName}:</strong> ${m.text}
-                        <small>${new Date(m.timestamp?.toDate()).toLocaleString()}</small>
-                        <button onclick="markRead('${doc.id}')">Mark Read</button>
+                    <div class="message" id="msg-${doc.id}">
+                        <strong>${m.clientName || 'Client'}:</strong> ${m.text}
+                        <small>${m.timestamp ? new Date(m.timestamp.toDate()).toLocaleString() : 'Just now'}</small>
+                        <div class="reply-box">
+                            <textarea id="reply-${doc.id}" placeholder="Type reply..." rows="2"></textarea>
+                            <button onclick="sendReply('${doc.id}', '${m.clientId}')">Send Reply</button>
+                        </div>
                     </div>
                 `;
             });
         }
 
-        async function markRead(msgId) {
-            await db.collection('messages').doc(msgId).update({ read: true });
-            loadAllMessages();
-        }
+        // Send reply to client
+        window.sendReply = async function(messageId, clientId) {
+            const replyText = document.getElementById(`reply-${messageId}`).value;
+            if (!replyText.trim()) return;
+            
+            await db.collection('messages').add({
+                clientId: clientId,
+                text: replyText,
+                from: 'admin',
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                read: false
+            });
+            
+            document.getElementById(`reply-${messageId}`).value = '';
+            alert('Reply sent');
+            loadAllMessages(); // refresh
+        };
 
-        async function createProject() {
-            const clientId = prompt('Enter client UID:');
+        // Create new project
+        window.createProject = async function() {
+            const clientId = prompt('Enter client UID (from All Clients section):');
             const name = prompt('Project name:');
             if (clientId && name) {
                 await db.collection('projects').add({
@@ -139,16 +177,21 @@
                 });
                 loadAllProjects();
             }
-        }
+        };
 
+        // Check auth state
         auth.onAuthStateChanged(user => {
-            if (user && user.email === 'carrollandsonspainting@gmail.com') {
-                loadAllClients();
-                loadAllProjects();
-                loadAllMessages();
-            } else {
+            if (!user) {
                 window.location.href = 'login.html';
+                return;
             }
+            if (user.email !== 'carrollandsonspainting@gmail.com') {
+                window.location.href = 'dashboard.html';
+                return;
+            }
+            loadAllClients();
+            loadAllProjects();
+            loadAllMessages();
         });
     </script>
 </body>
