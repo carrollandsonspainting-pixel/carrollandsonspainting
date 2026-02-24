@@ -22,7 +22,7 @@
         .project-card button { background: #2e7d32; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; margin-top: 0.5rem; cursor: pointer; }
         .message { background: #f1f3f5; padding: 0.5rem; border-radius: 4px; margin-bottom: 0.5rem; }
         .message small { color: #666; display: block; }
-        .upload-btn { display: inline-block; background: #f57c00; color: black; padding: 0.8rem 2rem; border-radius: 50px; text-decoration: none; font-weight: bold; margin-top: 1rem; }
+        .upload-btn { display: inline-block; background: #f57c00; color: black; padding: 0.8rem 2rem; border-radius: 50px; text-decoration: none; font-weight: bold; margin-top: 1rem; text-align: center; }
         textarea { width: 100%; padding: 0.5rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 4px; }
         .btn { background: #f57c00; color: black; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; font-weight: bold; }
     </style>
@@ -48,10 +48,10 @@
                     <h2>My Projects</h2>
                     <div id="projects"></div>
                 </div>
-                <!-- Google Drive Upload Card -->
+                <!-- Google Drive Upload Card with UPDATED LINK -->
                 <div class="card">
                     <h2>📤 Upload Progress Photos</h2>
-                    <p>Click the button below to upload photos directly to our secure Google Drive folder. Please include your name and project in the file name.</p>
+                    <p>Click the button below to upload photos directly to our secure Google Drive folder. Please include your name and project in the file name so we can track it easily.</p>
                     <a href="https://drive.google.com/drive/folders/1Bx_-RXcUtN4GuJyfjQXitKTG7qXQk1vO?usp=drive_link" target="_blank" class="upload-btn">📁 OPEN UPLOAD FOLDER</a>
                 </div>
             </div>
@@ -88,15 +88,15 @@
             const projectsDiv = document.getElementById('projects');
             projectsDiv.innerHTML = '';
             if (projectsSnapshot.empty) {
-                projectsDiv.innerHTML = '<p>No projects yet.</p>';
+                projectsDiv.innerHTML = '<p>You have no active projects yet. We’ll add them soon!</p>';
             }
             projectsSnapshot.forEach(doc => {
                 const p = doc.data();
                 projectsDiv.innerHTML += `
                     <div class="project-card" data-id="${doc.id}">
                         <h3>${p.name}</h3>
-                        <p>Status: <strong>${p.status || 'New'}</strong></p>
-                        <p>Next update: ${p.nextUpdate || 'TBA'}</p>
+                        <p>Status: <strong>${p.status || 'In Progress'}</strong></p>
+                        <p>Next update: ${p.nextUpdate || 'Check back soon'}</p>
                     </div>
                 `;
             });
@@ -110,14 +110,14 @@
             const messagesDiv = document.getElementById('messages');
             messagesDiv.innerHTML = '';
             if (messagesSnapshot.empty) {
-                messagesDiv.innerHTML = '<p>No messages yet.</p>';
+                messagesDiv.innerHTML = '<p>No messages yet. Send us a message below!</p>';
             }
             messagesSnapshot.forEach(doc => {
                 const m = doc.data();
                 messagesDiv.innerHTML += `
                     <div class="message">
                         <strong>${m.from === 'admin' ? 'Carroll & Sons' : 'You'}:</strong> ${m.text}
-                        <small>${m.timestamp ? new Date(m.timestamp.toDate()).toLocaleString() : 'Just now'}</small>
+                        <small>${m.timestamp ? new Date(m.timestamp.toDate()).toLocaleString() : 'Just sent'}</small>
                     </div>
                 `;
             });
@@ -156,5 +156,3 @@
     </script>
 </body>
 </html>
-
-
