@@ -1,4 +1,4 @@
-// Your Firebase configuration – REPLACE WITH YOUR OWN
+// Your Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyDMsPxrpfMgW6p_gk4Dl40xC3JT-L8UIOg",
     authDomain: "carroll-and-sons-painting.firebaseapp.com",
