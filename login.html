@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login – Carroll & Sons</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.5.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.5.0/firebase-storage.js"></script>
+    <style>
+        body { font-family: system-ui; background: #f5f5f5; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .login-box { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 90%; max-width: 400px; border-top: 4px solid #f57c00; }
+        h1 { color: #1a1a1a; margin-bottom: 1.5rem; }
+        h1 span { color: #f57c00; }
+        input { width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 8px; }
+        button { width: 100%; padding: 0.8rem; background: #f57c00; color: black; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
+        button:hover { background: #2e7d32; color: white; }
+        .error { color: red; text-align: center; margin-top: 1rem; }
+        .link { text-align: center; margin-top: 1rem; }
+        .link a { color: #2e7d32; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <h1>CARROLL <span>& SONS</span></h1>
+        <h2>Client Login</h2>
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button onclick="login()">LOG IN</button>
+        <div class="error" id="error"></div>
+        <div class="link">Don't have an account? <a href="signup.html">Sign up</a></div>
+        <div class="link"><a href="index.html">← Back to Home</a></div>
+    </div>
+
+    <script src="js/firebase-config.js"></script>
+    <script>
+        function login() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const errorDiv = document.getElementById('error');
+            auth.signInWithEmailAndPassword(email, password)
+                .then(() => {
+                    // Redirect handled by auth.js
+                })
+                .catch(err => errorDiv.textContent = err.message);
+        }
+    </script>
+</body>
+</html>
