@@ -9,20 +9,87 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: system-ui; background: #f8f9fa; }
-        .navbar { background: #1a1a1a; color: white; padding: 1rem; border-bottom: 3px solid #f57c00; }
+        .navbar { background: #1a1a1a; color: white; padding: 1rem; border-bottom: 3px solid #f57c00; position: sticky; top: 0; z-index: 100; }
         .navbar .container { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
         .logo h1 { font-size: 1.5rem; color: white; }
         .logo span { color: #f57c00; }
+        .user-info { display: flex; align-items: center; gap: 1rem; }
         .user-info button { background: #f57c00; color: black; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        
+        .notification-bell { position: relative; cursor: pointer; font-size: 1.5rem; margin-right: 1rem; }
+        .badge { position: absolute; top: -8px; right: -8px; background: red; color: white; border-radius: 50%; padding: 2px 6px; font-size: 0.8rem; min-width: 18px; text-align: center; }
+        .notification-panel { position: fixed; top: 80px; right: 20px; width: 350px; max-height: 500px; overflow-y: auto; background: white; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); display: none; z-index: 1000; border-left: 4px solid #f57c00; }
+        .notification-panel.show { display: block; }
+        .notification-header { padding: 1rem; border-bottom: 1px solid #eee; font-weight: bold; display: flex; justify-content: space-between; }
+        .notification-item { padding: 1rem; border-bottom: 1px solid #eee; transition: background 0.2s; }
+        .notification-item:hover { background: #f8f9fa; }
+        .notification-item.unread { background: #fff3e0; border-left: 3px solid #f57c00; }
+        .notification-item small { color: #666; display: block; margin-top: 0.3rem; }
+        .mark-read { background: #2e7d32; color: white; border: none; padding: 0.3rem 0.8rem; border-radius: 4px; cursor: pointer; font-size: 0.8rem; margin-top: 0.5rem; }
+        
         .container { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
         .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
         .card { background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 2rem; border-left: 4px solid #f57c00; }
-        .client-card, .project-card { background: #f1f3f5; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border-bottom: 2px solid #2e7d32; }
-        .message { background: #f1f3f5; padding: 0.5rem; border-radius: 4px; margin-bottom: 0.5rem; }
-        button { background: #2e7d32; color: white; border: none; padding: 0.5rem 1rem; border-radius: 4px; cursor: pointer; margin: 0.2rem; }
-        input, textarea { padding: 0.5rem; margin: 0.5rem 0; width: 100%; }
-        .btn-create { background: #f57c00; color: black; font-weight: bold; }
+        
+        .client-card { 
+            background: #f1f3f5; 
+            padding: 1rem; 
+            border-radius: 8px; 
+            margin-bottom: 1rem; 
+            border-bottom: 2px solid #2e7d32;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .client-info { flex: 1; }
+        .client-info h4 { margin-bottom: 0.25rem; }
+        .client-info p { color: #666; font-size: 0.9rem; margin: 0.1rem 0; }
+        .delete-btn { 
+            background: #dc3545; 
+            color: white; 
+            border: none; 
+            padding: 0.5rem 1rem; 
+            border-radius: 4px; 
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .delete-btn:hover { background: #c82333; }
+        
+        .project-card { 
+            background: #f1f3f5; 
+            padding: 1rem; 
+            border-radius: 8px; 
+            margin-bottom: 1rem; 
+            border-bottom: 2px solid #2e7d32;
+        }
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        .project-header h4 { margin: 0; }
+        
+        .message { 
+            background: #f1f3f5; 
+            padding: 1rem; 
+            border-radius: 8px; 
+            margin-bottom: 0.8rem;
+        }
+        .message-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.3rem;
+        }
+        .message-header strong { color: #2e7d32; }
+        .message small { color: #666; display: block; margin-top: 0.3rem; }
+        
+        .btn-create { background: #f57c00; color: black; font-weight: bold; margin-bottom: 1rem; }
+        input, textarea { padding: 0.5rem; margin: 0.5rem 0; width: 100%; border: 1px solid #ddd; border-radius: 4px; }
         .reply-box { margin-top: 0.5rem; }
+        .help-text { font-size:0.8rem; color:#666; margin-top: -0.3rem; margin-bottom: 0.5rem; }
     </style>
 </head>
 <body>
@@ -31,27 +98,46 @@
             <div class="logo">
                 <h1>CARROLL <span>& SONS</span> | ADMIN</h1>
             </div>
-            <div class="user-info">
-                <span>Admin</span>
-                <button onclick="logout()">LOGOUT</button>
+            <div style="display: flex; align-items: center;">
+                <div class="notification-bell" onclick="toggleNotifications()">
+                    🔔
+                    <span id="notificationBadge" class="badge" style="display: none;">0</span>
+                </div>
+                <div class="user-info">
+                    <span>Admin</span>
+                    <button onclick="logout()">LOGOUT</button>
+                </div>
             </div>
         </div>
     </nav>
 
+    <div id="notificationPanel" class="notification-panel">
+        <div class="notification-header">
+            <span>Notifications</span>
+            <button onclick="markAllRead()" style="background: none; color: #f57c00; padding: 0;">Mark all read</button>
+        </div>
+        <div id="notificationList"></div>
+    </div>
+
     <div class="container">
         <div class="grid">
             <div>
+                <!-- ALL CLIENTS SECTION -->
                 <div class="card">
                     <h2>All Clients</h2>
                     <div id="clients"></div>
                 </div>
+                
+                <!-- ALL PROJECTS SECTION -->
                 <div class="card">
                     <h2>All Projects</h2>
                     <button class="btn-create" onclick="createProject()">+ New Project</button>
                     <div id="allProjects"></div>
                 </div>
             </div>
+            
             <div>
+                <!-- ALL MESSAGES SECTION -->
                 <div class="card">
                     <h2>All Messages</h2>
                     <div id="allMessages"></div>
@@ -60,92 +146,240 @@
         </div>
     </div>
 
-    <script src="js/firebase-config.js"></script>
+    <script src="/carrollandsonspainting/js/firebase-config.js"></script>
     <script>
-        // Logout function
+        // ========== NOTIFICATION SYSTEM ==========
+        let notificationPanelOpen = false;
+        function toggleNotifications() {
+            const panel = document.getElementById('notificationPanel');
+            notificationPanelOpen = !notificationPanelOpen;
+            panel.classList.toggle('show', notificationPanelOpen);
+        }
+
+        async function loadNotifications() {
+            const snapshot = await db.collection('notifications')
+                .where('read', '==', false)
+                .orderBy('timestamp', 'desc')
+                .limit(20)
+                .get();
+            
+            const badge = document.getElementById('notificationBadge');
+            const list = document.getElementById('notificationList');
+            
+            if (!snapshot.empty) {
+                badge.style.display = 'inline';
+                badge.textContent = snapshot.size;
+                
+                list.innerHTML = '';
+                snapshot.forEach(doc => {
+                    const n = doc.data();
+                    const timestamp = n.timestamp ? new Date(n.timestamp.seconds * 1000).toLocaleString() : 'Just now';
+                    list.innerHTML += `
+                        <div class="notification-item unread" data-id="${doc.id}">
+                            <strong>📸 New Photo Upload</strong>
+                            <p>${n.clientName || 'A client'} uploaded: ${n.fileName}</p>
+                            <a href="${n.fileUrl}" target="_blank">View photo</a>
+                            <small>${timestamp}</small>
+                            <button class="mark-read" onclick="markNotificationRead('${doc.id}')">Mark Read</button>
+                        </div>
+                    `;
+                });
+            } else {
+                badge.style.display = 'none';
+                list.innerHTML = '<div class="notification-item">No new notifications</div>';
+            }
+        }
+
+        async function markNotificationRead(id) {
+            await db.collection('notifications').doc(id).update({ read: true });
+            loadNotifications();
+        }
+
+        async function markAllRead() {
+            const snapshot = await db.collection('notifications').where('read', '==', false).get();
+            const batch = db.batch();
+            snapshot.forEach(doc => {
+                batch.update(doc.ref, { read: true });
+            });
+            await batch.commit();
+            loadNotifications();
+        }
+
+        // ========== LOGOUT ==========
         window.logout = function() {
             auth.signOut().then(() => {
                 window.location.href = "index.html";
             });
         };
 
-        // Load all clients
+        // ========== LOAD ALL CLIENTS ==========
         async function loadAllClients() {
             const usersSnap = await db.collection('users').get();
             const clientsDiv = document.getElementById('clients');
             clientsDiv.innerHTML = '';
+            
             if (usersSnap.empty) {
                 clientsDiv.innerHTML = '<p>No clients yet.</p>';
+                return;
             }
+            
             usersSnap.forEach(doc => {
                 const user = doc.data();
+                const userId = doc.id;
+                const isAdmin = (user.email === 'carrollandsonspainting@gmail.com');
+                
                 clientsDiv.innerHTML += `
-                    <div class="client-card">
-                        <h4>${user.name}</h4>
-                        <p>Email: ${user.email}</p>
-                        <p>Client ID: ${doc.id}</p>
+                    <div class="client-card" data-id="${userId}">
+                        <div class="client-info">
+                            <h4>${user.name}</h4>
+                            <p>Email: ${user.email}</p>
+                            <p>Client ID: ${userId}</p>
+                        </div>
+                        ${!isAdmin ? `<button class="delete-btn" onclick="deleteClient('${userId}', '${user.name}')">DELETE</button>` : ''}
                     </div>
                 `;
             });
         }
 
-        // Load all projects
+        // ========== DELETE CLIENT ==========
+        window.deleteClient = async function(clientId, clientName) {
+            if (!confirm(`Delete ${clientName} and ALL their projects and messages? This cannot be undone.`)) {
+                return;
+            }
+            
+            try {
+                const batch = db.batch();
+                
+                // Delete messages
+                const messagesSnap = await db.collection('messages').where('clientId', '==', clientId).get();
+                messagesSnap.forEach(doc => batch.delete(doc.ref));
+                
+                // Delete projects
+                const projectsSnap = await db.collection('projects').where('clientId', '==', clientId).get();
+                projectsSnap.forEach(doc => batch.delete(doc.ref));
+                
+                // Delete user document
+                batch.delete(db.collection('users').doc(clientId));
+                
+                await batch.commit();
+                
+                alert('Client and all associated data deleted');
+                loadAllClients();
+                loadAllProjects();
+                loadAllMessages();
+                
+            } catch (error) {
+                console.error('Error deleting client:', error);
+                alert('Error deleting client');
+            }
+        };
+
+        // ========== LOAD ALL PROJECTS ==========
         async function loadAllProjects() {
-            const projectsSnap = await db.collection('projects').get();
+            const projectsSnap = await db.collection('projects').orderBy('createdAt', 'desc').get();
             const projectsDiv = document.getElementById('allProjects');
             projectsDiv.innerHTML = '';
+            
             if (projectsSnap.empty) {
                 projectsDiv.innerHTML = '<p>No projects yet.</p>';
+                return;
             }
+            
+            const today = new Date().toISOString().split('T')[0];
+            
             projectsSnap.forEach(doc => {
                 const p = doc.data();
+                const projectId = doc.id;
+                const nextUpdate = p.nextUpdate || '';
+                
                 projectsDiv.innerHTML += `
                     <div class="project-card">
-                        <h4>${p.name}</h4>
+                        <div class="project-header">
+                            <h4>${p.name}</h4>
+                            <button class="delete-btn" onclick="deleteProject('${projectId}')">DELETE</button>
+                        </div>
                         <p>Client ID: ${p.clientId}</p>
-                        <p>Status: <input type="text" value="${p.status || 'New'}" onchange="updateStatus('${doc.id}', this.value)"></p>
-                        <p>Next update: <input type="date" value="${p.nextUpdate || ''}" onchange="updateNextUpdate('${doc.id}', this.value)"></p>
+                        <p>Status: <input type="text" value="${p.status || 'New'}" onchange="updateStatus('${projectId}', this.value)"></p>
+                        <p>Next update: <input type="date" value="${nextUpdate}" min="${today}" onchange="updateNextUpdate('${projectId}', this.value)"></p>
+                        <p class="help-text">Leave blank if no update scheduled</p>
                     </div>
                 `;
             });
         }
 
-        // Update project status
+        // ========== DELETE PROJECT ==========
+        window.deleteProject = async function(projectId) {
+            if (!confirm('Delete this project?')) return;
+            try {
+                await db.collection('projects').doc(projectId).delete();
+                alert('Project deleted');
+                loadAllProjects();
+            } catch (error) {
+                console.error('Error deleting project:', error);
+                alert('Error deleting project');
+            }
+        };
+
+        // ========== UPDATE PROJECT STATUS ==========
         window.updateStatus = async function(projectId, newStatus) {
             await db.collection('projects').doc(projectId).update({ status: newStatus });
             alert('Status updated');
         };
 
-        // Update next update date
+        // ========== UPDATE NEXT UPDATE DATE ==========
         window.updateNextUpdate = async function(projectId, date) {
-            await db.collection('projects').doc(projectId).update({ nextUpdate: date });
-            alert('Next update date set');
+            const value = date || '';
+            await db.collection('projects').doc(projectId).update({ nextUpdate: value });
+            alert(value ? 'Next update date set' : 'Next update cleared');
         };
 
-        // Load all messages
+        // ========== LOAD ALL MESSAGES ==========
         async function loadAllMessages() {
             const msgsSnap = await db.collection('messages').orderBy('timestamp', 'desc').get();
             const msgsDiv = document.getElementById('allMessages');
             msgsDiv.innerHTML = '';
+            
             if (msgsSnap.empty) {
                 msgsDiv.innerHTML = '<p>No messages yet.</p>';
+                return;
             }
+            
             msgsSnap.forEach(doc => {
                 const m = doc.data();
+                const msgId = doc.id;
+                const timestamp = m.timestamp ? new Date(m.timestamp.toDate()).toLocaleString() : 'Just now';
+                
                 msgsDiv.innerHTML += `
-                    <div class="message" id="msg-${doc.id}">
-                        <strong>${m.clientName || 'Client'}:</strong> ${m.text}
-                        <small>${m.timestamp ? new Date(m.timestamp.toDate()).toLocaleString() : 'Just now'}</small>
+                    <div class="message" id="msg-${msgId}">
+                        <div class="message-header">
+                            <strong>${m.clientName || 'Client'}:</strong>
+                            <button class="delete-btn" onclick="deleteMessage('${msgId}')">DELETE</button>
+                        </div>
+                        <p>${m.text}</p>
+                        <small>${timestamp}</small>
                         <div class="reply-box">
-                            <textarea id="reply-${doc.id}" placeholder="Type reply..." rows="2"></textarea>
-                            <button onclick="sendReply('${doc.id}', '${m.clientId}')">Send Reply</button>
+                            <textarea id="reply-${msgId}" placeholder="Type reply..." rows="2"></textarea>
+                            <button onclick="sendReply('${msgId}', '${m.clientId}')">Send Reply</button>
                         </div>
                     </div>
                 `;
             });
         }
 
-        // Send reply to client
+        // ========== DELETE MESSAGE ==========
+        window.deleteMessage = async function(messageId) {
+            if (!confirm('Delete this message?')) return;
+            try {
+                await db.collection('messages').doc(messageId).delete();
+                alert('Message deleted');
+                loadAllMessages();
+            } catch (error) {
+                console.error('Error deleting message:', error);
+                alert('Error deleting message');
+            }
+        };
+
+        // ========== SEND REPLY ==========
         window.sendReply = async function(messageId, clientId) {
             const replyText = document.getElementById(`reply-${messageId}`).value;
             if (!replyText.trim()) return;
@@ -160,14 +394,18 @@
             
             document.getElementById(`reply-${messageId}`).value = '';
             alert('Reply sent');
-            loadAllMessages(); // refresh
+            loadAllMessages();
         };
 
-        // Create new project
+        // ========== CREATE NEW PROJECT ==========
         window.createProject = async function() {
             const clientId = prompt('Enter client UID (from All Clients section):');
+            if (!clientId) return;
+            
             const name = prompt('Project name:');
-            if (clientId && name) {
+            if (!name) return;
+            
+            try {
                 await db.collection('projects').add({
                     clientId: clientId,
                     name: name,
@@ -176,10 +414,13 @@
                     createdAt: firebase.firestore.FieldValue.serverTimestamp()
                 });
                 loadAllProjects();
+            } catch (error) {
+                console.error('Error creating project:', error);
+                alert('Error creating project');
             }
         };
 
-        // Check auth state
+        // ========== AUTH STATE ==========
         auth.onAuthStateChanged(user => {
             if (!user) {
                 window.location.href = 'login.html';
@@ -192,6 +433,18 @@
             loadAllClients();
             loadAllProjects();
             loadAllMessages();
+            loadNotifications();
+            setInterval(loadNotifications, 10000);
+        });
+
+        // Close notification panel
+        document.addEventListener('click', function(event) {
+            const panel = document.getElementById('notificationPanel');
+            const bell = document.querySelector('.notification-bell');
+            if (notificationPanelOpen && panel && bell && !panel.contains(event.target) && !bell.contains(event.target)) {
+                panel.classList.remove('show');
+                notificationPanelOpen = false;
+            }
         });
     </script>
 </body>
