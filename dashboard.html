@@ -2,196 +2,34 @@
 <html>
 <head>
     <title>Client Dashboard – Carroll & Sons</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <script src="https://www.gstatic.com/firebasejs/11.5.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/11.5.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore-compat.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: system-ui; background: #f8f9fa; }
-        
-        .navbar { 
-            background: #1a1a1a; 
-            color: white; 
-            padding: 1rem; 
-            border-bottom: 3px solid #f57c00; 
-        }
-        .navbar .container { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            max-width: 1200px; 
-            margin: 0 auto; 
-        }
-        .logo h1 { 
-            font-size: 1.5rem; 
-            color: white; 
-        }
-        .logo span { 
-            color: #f57c00; 
-        }
-        .user-info { 
-            display: flex; 
-            align-items: center; 
-            gap: 1rem; 
-        }
-        .user-info button { 
-            background: #f57c00; 
-            color: black; 
-            border: none; 
-            padding: 0.5rem 1rem; 
-            border-radius: 5px; 
-            cursor: pointer; 
-            font-weight: bold; 
-        }
-        .user-info button:hover { 
-            background: #2e7d32; 
-            color: white; 
-        }
-
-        .container { 
-            max-width: 1200px; 
-            margin: 2rem auto; 
-            padding: 0 1rem; 
-        }
-        
-        .grid { 
-            display: grid; 
-            grid-template-columns: 2fr 1fr; 
-            gap: 2rem; 
-        }
-        
-        @media (max-width: 768px) {
-            .grid { 
-                grid-template-columns: 1fr; 
-            }
-        }
-        
-        .card { 
-            background: white; 
-            padding: 1.5rem; 
-            border-radius: 12px; 
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
-            margin-bottom: 2rem; 
-            border-left: 4px solid #f57c00; 
-        }
-        
-        .project-card { 
-            background: #f1f3f5; 
-            padding: 1rem; 
-            border-radius: 8px; 
-            margin-bottom: 1rem; 
-            border-bottom: 2px solid #2e7d32; 
-        }
-        
-        /* Message Styles with Delete Button */
-        .message { 
-            background: #f1f3f5; 
-            padding: 1rem; 
-            border-radius: 8px; 
-            margin-bottom: 1rem; 
-            border-left: 3px solid #2e7d32;
-            position: relative;
-        }
-        
-        .message.admin { 
-            border-left-color: #f57c00; 
-            background: #fff3e0; 
-        }
-        
-        .message-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.5rem;
-        }
-        
-        .message-header strong { 
-            color: #2e7d32; 
-        }
-        
-        .message.admin .message-header strong { 
-            color: #f57c00; 
-        }
-        
-        .delete-msg-btn { 
-            background: #dc3545; 
-            color: white; 
-            border: none; 
-            padding: 0.25rem 0.5rem; 
-            border-radius: 4px; 
-            cursor: pointer; 
-            font-size: 0.8rem;
-            font-weight: bold;
-            transition: background 0.2s;
-        }
-        
-        .delete-msg-btn:hover { 
-            background: #c82333; 
-        }
-        
-        .message small { 
-            color: #666; 
-            display: block; 
-            margin-top: 0.5rem; 
-            font-size: 0.8rem; 
-        }
-        
-        .upload-btn { 
-            display: inline-block; 
-            background: #f57c00; 
-            color: black; 
-            padding: 0.8rem 2rem; 
-            border-radius: 50px; 
-            text-decoration: none; 
-            font-weight: bold; 
-            margin-top: 1rem; 
-            text-align: center; 
-            transition: background 0.2s;
-        }
-        
-        .upload-btn:hover { 
-            background: #2e7d32; 
-            color: white; 
-        }
-        
-        textarea { 
-            width: 100%; 
-            padding: 0.8rem; 
-            margin-bottom: 1rem; 
-            border: 2px solid #e2e8f0; 
-            border-radius: 8px; 
-            font-family: inherit; 
-            transition: border-color 0.2s;
-        }
-        
-        textarea:focus { 
-            outline: none; 
-            border-color: #f57c00; 
-        }
-        
-        .btn { 
-            background: #f57c00; 
-            color: black; 
-            border: none; 
-            padding: 0.8rem 1.5rem; 
-            border-radius: 8px; 
-            cursor: pointer; 
-            font-weight: bold; 
-            transition: background 0.2s; 
-        }
-        
-        .btn:hover { 
-            background: #2e7d32; 
-            color: white; 
-        }
-        
-        .empty-state { 
-            color: #718096; 
-            text-align: center; 
-            padding: 2rem; 
-            font-style: italic; 
-        }
+        body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #f8f9fa; }
+        .navbar { background: #1a1a1a; color: white; padding: 0.75rem 1rem; border-bottom: 3px solid #f57c00; }
+        .navbar .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+        .logo h1 { font-size: 1.2rem; color: white; }
+        .logo span { color: #f57c00; }
+        .user-info { display: flex; align-items: center; gap: 0.5rem; }
+        .user-info button { background: #f57c00; color: black; border: none; padding: 0.4rem 0.8rem; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 0.9rem; }
+        .container { max-width: 1200px; margin: 1rem auto; padding: 0 1rem; }
+        .grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
+        @media (min-width: 800px) { .grid { grid-template-columns: 2fr 1fr; } }
+        .card { background: white; padding: 1rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); margin-bottom: 1rem; border-left: 4px solid #f57c00; }
+        .card h2 { font-size: 1.3rem; margin-bottom: 1rem; }
+        .project-card { background: #f1f3f5; padding: 0.8rem; border-radius: 8px; margin-bottom: 0.8rem; border-bottom: 2px solid #2e7d32; }
+        .message { background: #f1f3f5; padding: 0.8rem; border-radius: 8px; margin-bottom: 0.8rem; border-left: 3px solid #2e7d32; }
+        .message.admin { border-left-color: #f57c00; background: #fff3e0; }
+        .message-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+        .delete-msg-btn { background: #dc3545; color: white; border: none; padding: 0.2rem 0.6rem; border-radius: 4px; font-size: 0.7rem; cursor: pointer; }
+        .message small { font-size: 0.7rem; color: #666; display: block; margin-top: 0.3rem; }
+        .upload-btn { display: inline-block; background: #f57c00; color: black; padding: 0.6rem 1.2rem; border-radius: 50px; text-decoration: none; font-weight: bold; margin-top: 0.5rem; text-align: center; width: 100%; max-width: 300px; }
+        textarea { width: 100%; padding: 0.6rem; border: 2px solid #e2e8f0; border-radius: 8px; font-family: inherit; margin: 0.5rem 0; }
+        .btn { background: #f57c00; color: black; border: none; padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; }
+        .empty-state { color: #718096; text-align: center; padding: 1rem; font-style: italic; }
     </style>
 </head>
 <body>
@@ -201,7 +39,7 @@
                 <h1>CARROLL <span>& SONS</span> | CLIENT PORTAL</h1>
             </div>
             <div class="user-info">
-                <span>Welcome, <span id="userName"></span></span>
+                <span id="userName"></span>
                 <button onclick="logout()">LOGOUT</button>
             </div>
         </div>
@@ -209,28 +47,21 @@
 
     <div class="container">
         <div class="grid">
-            <!-- LEFT COLUMN: Projects + Upload -->
             <div>
-                <!-- Projects Section -->
                 <div class="card">
                     <h2>My Projects</h2>
                     <div id="projects"></div>
                 </div>
-                
-                <!-- Google Drive Upload Section -->
                 <div class="card">
                     <h2>📤 Upload Progress Photos</h2>
-                    <p>Click the button below to upload files directly to our secure Google Drive folder. Please include your name and project in the file name so we can track it easily.</p>
+                    <p>Include your name and project in the file name.</p>
                     <a href="https://drive.google.com/drive/folders/1Bx_-RXcUtN4GuJyfjQXitKTG7qXQk1vO?usp=drive_link" target="_blank" class="upload-btn">📁 OPEN UPLOAD FOLDER</a>
                 </div>
             </div>
-            
-            <!-- RIGHT COLUMN: Messages -->
             <div>
                 <div class="card">
                     <h2>Messages</h2>
                     <div id="messages"></div>
-                    
                     <textarea id="messageInput" placeholder="Type a message..." rows="3"></textarea>
                     <button class="btn" onclick="sendMessage()">Send Message</button>
                 </div>
@@ -240,108 +71,83 @@
 
     <script src="/carrollandsonspainting/js/firebase-config.js"></script>
     <script>
-        // ========== LOGOUT ==========
-        window.logout = function() {
-            auth.signOut().then(() => {
-                window.location.href = "index.html";
-            });
-        };
+        let unsubscribeMessages = null;
 
-        // ========== LOAD CLIENT DATA ==========
-        async function loadClientData() {
+        window.logout = () => auth.signOut().then(() => window.location.href = "index.html");
+
+        function loadProjects() {
             const user = auth.currentUser;
             if (!user) return;
-
-            document.getElementById('userName').textContent = user.displayName || user.email;
-
-            // Load Projects
-            const projectsSnapshot = await db.collection('projects')
-                .where('clientId', '==', user.uid)
-                .get();
-                
-            const projectsDiv = document.getElementById('projects');
-            projectsDiv.innerHTML = '';
-            
-            if (projectsSnapshot.empty) {
-                projectsDiv.innerHTML = '<div class="empty-state">You have no active projects yet. We’ll add them soon!</div>';
-            } else {
-                projectsSnapshot.forEach(doc => {
-                    const p = doc.data();
-                    projectsDiv.innerHTML += `
-                        <div class="project-card">
-                            <h3>${p.name}</h3>
-                            <p><strong>Status:</strong> ${p.status || 'In Progress'}</p>
-                            <p><strong>Next update:</strong> ${p.nextUpdate || 'Check back soon'}</p>
-                        </div>
-                    `;
-                });
-            }
-
-            // Load Messages (with delete buttons for client's own messages)
-            const messagesSnapshot = await db.collection('messages')
-                .where('clientId', '==', user.uid)
-                .orderBy('timestamp', 'asc')
-                .get();
-
-            const messagesDiv = document.getElementById('messages');
-            messagesDiv.innerHTML = '';
-            
-            if (messagesSnapshot.empty) {
-                messagesDiv.innerHTML = '<div class="empty-state">No messages yet. Send us a message below!</div>';
-            } else {
-                messagesSnapshot.forEach(doc => {
-                    const m = doc.data();
-                    const messageId = doc.id;
-                    const isAdmin = m.from === 'admin';
-                    const messageClass = isAdmin ? 'message admin' : 'message';
-                    const senderName = isAdmin ? '🏢 Carroll & Sons' : '👤 You';
-                    const time = m.timestamp ? new Date(m.timestamp.toDate()).toLocaleString() : 'Just sent';
-                    
-                    messagesDiv.innerHTML += `
-                        <div class="${messageClass}" data-id="${messageId}">
-                            <div class="message-header">
-                                <strong>${senderName}:</strong>
-                                ${!isAdmin ? `<button class="delete-msg-btn" onclick="deleteClientMessage('${messageId}')">DELETE</button>` : ''}
+            db.collection('projects').where('clientId', '==', user.uid).get().then(snapshot => {
+                const div = document.getElementById('projects');
+                div.innerHTML = '';
+                if (snapshot.empty) {
+                    div.innerHTML = '<div class="empty-state">No active projects yet.</div>';
+                } else {
+                    snapshot.forEach(doc => {
+                        const p = doc.data();
+                        div.innerHTML += `
+                            <div class="project-card">
+                                <h3>${p.name}</h3>
+                                <p><strong>Status:</strong> ${p.status || 'In Progress'}</p>
+                                <p><strong>Next update:</strong> ${p.nextUpdate || 'Check back soon'}</p>
                             </div>
-                            <p>${m.text}</p>
-                            <small>${time}</small>
-                        </div>
-                    `;
-                });
-            }
+                        `;
+                    });
+                }
+            });
         }
 
-        // ========== DELETE CLIENT'S OWN MESSAGE ==========
-        window.deleteClientMessage = async function(messageId) {
-            if (!confirm('Delete this message? This cannot be undone.')) {
-                return;
-            }
-            
+        function setupMessagesListener() {
+            const user = auth.currentUser;
+            if (!user) return;
+            if (unsubscribeMessages) unsubscribeMessages();
+            unsubscribeMessages = db.collection('messages')
+                .where('clientId', '==', user.uid)
+                .orderBy('timestamp', 'asc')
+                .onSnapshot(snapshot => {
+                    const div = document.getElementById('messages');
+                    div.innerHTML = '';
+                    if (snapshot.empty) {
+                        div.innerHTML = '<div class="empty-state">No messages yet.</div>';
+                    } else {
+                        snapshot.forEach(doc => {
+                            const m = doc.data();
+                            const msgId = doc.id;
+                            const isAdmin = m.from === 'admin';
+                            const time = m.timestamp ? new Date(m.timestamp.toDate()).toLocaleString() : 'Just sent';
+                            div.innerHTML += `
+                                <div class="message ${isAdmin ? 'admin' : ''}">
+                                    <div class="message-header">
+                                        <strong>${isAdmin ? '🏢 Carroll & Sons' : '👤 You'}:</strong>
+                                        ${!isAdmin ? `<button class="delete-msg-btn" onclick="deleteMessage('${msgId}')">DELETE</button>` : ''}
+                                    </div>
+                                    <p>${m.text}</p>
+                                    <small>${time}</small>
+                                </div>
+                            `;
+                        });
+                    }
+                }, error => console.error("Message listener error:", error));
+        }
+
+        window.deleteMessage = async (id) => {
+            if (!confirm('Delete this message?')) return;
             try {
-                await db.collection('messages').doc(messageId).delete();
-                alert('Message deleted');
-                loadClientData(); // Refresh messages
-            } catch (error) {
-                console.error('Error deleting message:', error);
-                alert('Error deleting message. Please try again.');
+                await db.collection('messages').doc(id).delete();
+            } catch (err) {
+                alert('Error deleting message');
+                console.error(err);
             }
         };
 
-        // ========== SEND MESSAGE TO ADMIN ==========
-        window.sendMessage = async function() {
+        window.sendMessage = async () => {
             const user = auth.currentUser;
             const text = document.getElementById('messageInput').value.trim();
-            
-            if (!text) {
-                alert('Please enter a message');
-                return;
-            }
-
-            // Disable button temporarily
-            const button = document.querySelector('.btn');
-            button.disabled = true;
-            button.textContent = 'Sending...';
-
+            if (!text) return alert('Please enter a message');
+            const btn = document.querySelector('.btn');
+            btn.disabled = true;
+            btn.textContent = 'Sending...';
             try {
                 await db.collection('messages').add({
                     clientId: user.uid,
@@ -351,49 +157,22 @@
                     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                     read: false
                 });
-                
                 document.getElementById('messageInput').value = '';
-                loadClientData(); // Refresh messages
-            } catch (error) {
-                console.error('Error sending message:', error);
-                alert('Error sending message. Please try again.');
+            } catch (err) {
+                alert('Error sending message');
+                console.error(err);
             } finally {
-                button.disabled = false;
-                button.textContent = 'Send Message';
+                btn.disabled = false;
+                btn.textContent = 'Send Message';
             }
         };
 
-        // ========== AUTH STATE LISTENER ==========
         auth.onAuthStateChanged(user => {
-            if (!user) {
-                window.location.href = 'login.html';
-                return;
-            }
-            
-            // Redirect admin to admin panel
-            if (user.email === 'carrollandsonspainting@gmail.com') {
-                window.location.href = 'admin.html';
-                return;
-            }
-            
-            loadClientData();
-            
-            // Set up real-time listener for new messages
-            db.collection('messages')
-                .where('clientId', '==', user.uid)
-                .orderBy('timestamp', 'asc')
-                .onSnapshot(() => {
-                    loadClientData(); // Refresh when messages change
-                });
-        });
-
-        // Smooth scroll for anchor links (if any)
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) target.scrollIntoView({ behavior: 'smooth' });
-            });
+            if (!user) return window.location.href = 'login.html';
+            if (user.email === 'carrollandsonspainting@gmail.com') return window.location.href = 'admin.html';
+            document.getElementById('userName').textContent = user.displayName || user.email;
+            loadProjects();
+            setupMessagesListener();
         });
     </script>
 </body>
