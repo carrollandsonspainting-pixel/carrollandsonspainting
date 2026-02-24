@@ -3,9 +3,9 @@
 <head>
     <title>Client Dashboard – Carroll & Sons</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://www.gstatic.com/firebasejs/11.5.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/11.5.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.5.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.5.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore-compat.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: system-ui; background: #f8f9fa; }
@@ -52,7 +52,7 @@
                 <div class="card">
                     <h2>📤 Upload Progress Photos</h2>
                     <p>Click the button below to upload photos directly to our secure Google Drive folder. Please include your name and project in the file name.</p>
-                    <a href="https://drive.google.com/drive/folders/1Bx_-RXcUtN4GuJyfjQXitKTG7qXQk1vO?usp=drive_link" target="_blank" class="upload-btn">📁 OPEN UPLOAD FOLDER</a>
+                    <a href="https://drive.google.com/drive/folders/YOUR_FOLDER_ID" target="_blank" class="upload-btn">📁 OPEN UPLOAD FOLDER</a>
                 </div>
             </div>
             <!-- Right Column: Messages -->
@@ -68,8 +68,14 @@
     </div>
 
     <script src="js/firebase-config.js"></script>
-    <script src="js/auth.js"></script>
     <script>
+        // Logout function
+        window.logout = function() {
+            auth.signOut().then(() => {
+                window.location.href = "index.html";
+            });
+        };
+
         // Load client's projects and messages
         async function loadClientData() {
             const user = auth.currentUser;
@@ -81,12 +87,15 @@
             const projectsSnapshot = await db.collection('projects').where('clientId', '==', user.uid).get();
             const projectsDiv = document.getElementById('projects');
             projectsDiv.innerHTML = '';
+            if (projectsSnapshot.empty) {
+                projectsDiv.innerHTML = '<p>No projects yet.</p>';
+            }
             projectsSnapshot.forEach(doc => {
                 const p = doc.data();
                 projectsDiv.innerHTML += `
                     <div class="project-card" data-id="${doc.id}">
                         <h3>${p.name}</h3>
-                        <p>Status: <strong>${p.status}</strong></p>
+                        <p>Status: <strong>${p.status || 'New'}</strong></p>
                         <p>Next update: ${p.nextUpdate || 'TBA'}</p>
                     </div>
                 `;
@@ -100,12 +109,15 @@
                 .get();
             const messagesDiv = document.getElementById('messages');
             messagesDiv.innerHTML = '';
+            if (messagesSnapshot.empty) {
+                messagesDiv.innerHTML = '<p>No messages yet.</p>';
+            }
             messagesSnapshot.forEach(doc => {
                 const m = doc.data();
                 messagesDiv.innerHTML += `
                     <div class="message">
                         <strong>${m.from === 'admin' ? 'Carroll & Sons' : 'You'}:</strong> ${m.text}
-                        <small>${new Date(m.timestamp?.toDate()).toLocaleString()}</small>
+                        <small>${m.timestamp ? new Date(m.timestamp.toDate()).toLocaleString() : 'Just now'}</small>
                     </div>
                 `;
             });
@@ -128,10 +140,18 @@
             loadClientData(); // refresh messages
         };
 
+        // Check auth state
         auth.onAuthStateChanged(user => {
-            if (user && !user.email.includes('carrollandsonspainting@gmail.com')) {
-                loadClientData();
+            if (!user) {
+                window.location.href = 'login.html';
+                return;
             }
+            // Redirect admin to admin panel
+            if (user.email === 'carrollandsonspainting@gmail.com') {
+                window.location.href = 'admin.html';
+                return;
+            }
+            loadClientData();
         });
     </script>
 </body>
