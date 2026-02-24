@@ -2,94 +2,173 @@
 <html>
 <head>
     <title>Admin Panel – Carroll & Sons</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <script src="https://www.gstatic.com/firebasejs/11.5.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/11.5.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/11.5.0/firebase-firestore-compat.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: system-ui; background: #f8f9fa; }
-        .navbar { background: #1a1a1a; color: white; padding: 1rem; border-bottom: 3px solid #f57c00; position: sticky; top: 0; z-index: 100; }
-        .navbar .container { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
-        .logo h1 { font-size: 1.5rem; color: white; }
+        body { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: #f8f9fa; }
+        .navbar { 
+            background: #1a1a1a; 
+            color: white; 
+            padding: 0.75rem 1rem; 
+            border-bottom: 3px solid #f57c00; 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+        }
+        .navbar .container { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            flex-wrap: wrap;
+        }
+        .logo h1 { 
+            font-size: 1.2rem; 
+            color: white; 
+        }
         .logo span { color: #f57c00; }
-        .user-info { display: flex; align-items: center; gap: 1rem; }
-        .user-info button { background: #f57c00; color: black; border: none; padding: 0.5rem 1rem; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        .user-info { 
+            display: flex; 
+            align-items: center; 
+            gap: 0.5rem; 
+            flex-wrap: wrap;
+        }
+        .user-info button { 
+            background: #f57c00; 
+            color: black; 
+            border: none; 
+            padding: 0.4rem 0.8rem; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            font-size: 0.9rem;
+        }
         
-        .notification-bell { position: relative; cursor: pointer; font-size: 1.5rem; margin-right: 1rem; }
-        .badge { position: absolute; top: -8px; right: -8px; background: red; color: white; border-radius: 50%; padding: 2px 6px; font-size: 0.8rem; min-width: 18px; text-align: center; }
-        .notification-panel { position: fixed; top: 80px; right: 20px; width: 350px; max-height: 500px; overflow-y: auto; background: white; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); display: none; z-index: 1000; border-left: 4px solid #f57c00; }
+        .notification-bell { 
+            position: relative; 
+            cursor: pointer; 
+            font-size: 1.3rem; 
+            margin-right: 0.5rem; 
+        }
+        .badge { 
+            position: absolute; 
+            top: -5px; 
+            right: -5px; 
+            background: red; 
+            color: white; 
+            border-radius: 50%; 
+            padding: 2px 5px; 
+            font-size: 0.7rem; 
+            min-width: 16px; 
+            text-align: center; 
+        }
+        .notification-panel { 
+            position: fixed; 
+            top: 70px; 
+            right: 10px; 
+            width: 90%; 
+            max-width: 350px; 
+            max-height: 70vh; 
+            overflow-y: auto; 
+            background: white; 
+            border-radius: 12px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2); 
+            display: none; 
+            z-index: 1000; 
+            border-left: 4px solid #f57c00; 
+        }
         .notification-panel.show { display: block; }
         .notification-header { padding: 1rem; border-bottom: 1px solid #eee; font-weight: bold; display: flex; justify-content: space-between; }
-        .notification-item { padding: 1rem; border-bottom: 1px solid #eee; transition: background 0.2s; }
-        .notification-item:hover { background: #f8f9fa; }
+        .notification-item { padding: 1rem; border-bottom: 1px solid #eee; }
         .notification-item.unread { background: #fff3e0; border-left: 3px solid #f57c00; }
         .notification-item small { color: #666; display: block; margin-top: 0.3rem; }
-        .mark-read { background: #2e7d32; color: white; border: none; padding: 0.3rem 0.8rem; border-radius: 4px; cursor: pointer; font-size: 0.8rem; margin-top: 0.5rem; }
+        .mark-read { background: #2e7d32; color: white; border: none; padding: 0.2rem 0.6rem; border-radius: 4px; cursor: pointer; font-size: 0.7rem; }
         
-        .container { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
-        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-        .card { background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 2rem; border-left: 4px solid #f57c00; }
+        .container { max-width: 1200px; margin: 1rem auto; padding: 0 1rem; }
+        .grid { 
+            display: grid; 
+            grid-template-columns: 1fr; 
+            gap: 1.5rem; 
+        }
+        @media (min-width: 900px) {
+            .grid { grid-template-columns: 1fr 1fr; }
+        }
         
-        .client-card { 
-            background: #f1f3f5; 
+        .card { 
+            background: white; 
             padding: 1rem; 
-            border-radius: 8px; 
+            border-radius: 12px; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1); 
             margin-bottom: 1rem; 
-            border-bottom: 2px solid #2e7d32;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            border-left: 4px solid #f57c00; 
+        }
+        .card h2 { 
+            font-size: 1.3rem; 
+            margin-bottom: 1rem; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+        
+        .client-card, .project-card, .message { 
+            background: #f1f3f5; 
+            padding: 0.8rem; 
+            border-radius: 8px; 
+            margin-bottom: 0.8rem; 
+            border-bottom: 2px solid #2e7d32; 
+            word-wrap: break-word;
+        }
+        .client-card { display: flex; flex-direction: column; gap: 0.5rem; }
+        @media (min-width: 600px) {
+            .client-card { flex-direction: row; justify-content: space-between; align-items: center; }
         }
         .client-info { flex: 1; }
-        .client-info h4 { margin-bottom: 0.25rem; }
-        .client-info p { color: #666; font-size: 0.9rem; margin: 0.1rem 0; }
+        .client-info h4 { font-size: 1rem; margin-bottom: 0.2rem; }
+        .client-info p { font-size: 0.8rem; color: #555; }
         .delete-btn { 
             background: #dc3545; 
             color: white; 
             border: none; 
-            padding: 0.5rem 1rem; 
+            padding: 0.4rem 0.8rem; 
             border-radius: 4px; 
-            cursor: pointer;
-            font-weight: bold;
-            transition: background 0.2s;
+            cursor: pointer; 
+            font-weight: bold; 
+            font-size: 0.8rem;
+            align-self: flex-start;
         }
-        .delete-btn:hover { background: #c82333; }
         
-        .project-card { 
-            background: #f1f3f5; 
-            padding: 1rem; 
-            border-radius: 8px; 
-            margin-bottom: 1rem; 
-            border-bottom: 2px solid #2e7d32;
-        }
-        .project-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.5rem;
-        }
-        .project-header h4 { margin: 0; }
+        .project-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+        .project-header h4 { font-size: 1rem; }
         
-        .message { 
-            background: #f1f3f5; 
-            padding: 1rem; 
-            border-radius: 8px; 
-            margin-bottom: 0.8rem;
-        }
-        .message-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.3rem;
-        }
-        .message-header strong { color: #2e7d32; }
-        .message small { color: #666; display: block; margin-top: 0.3rem; }
+        .message-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
+        .message-header strong { font-size: 0.9rem; }
+        .message p { margin: 0.5rem 0; font-size: 0.95rem; }
+        .message small { font-size: 0.7rem; color: #666; }
         
-        .btn-create { background: #f57c00; color: black; font-weight: bold; margin-bottom: 1rem; }
-        input, textarea { padding: 0.5rem; margin: 0.5rem 0; width: 100%; border: 1px solid #ddd; border-radius: 4px; }
+        .btn-create { 
+            background: #f57c00; 
+            color: black; 
+            border: none; 
+            padding: 0.5rem 1rem; 
+            border-radius: 5px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            font-size: 0.9rem;
+        }
+        input, textarea { 
+            width: 100%; 
+            padding: 0.5rem; 
+            margin: 0.3rem 0; 
+            border: 1px solid #ddd; 
+            border-radius: 4px; 
+            font-size: 0.95rem;
+        }
         .reply-box { margin-top: 0.5rem; }
-        .help-text { font-size:0.8rem; color:#666; margin-top: -0.3rem; margin-bottom: 0.5rem; }
+        .help-text { font-size:0.75rem; color:#666; margin-top: -0.2rem; }
     </style>
 </head>
 <body>
@@ -98,15 +177,13 @@
             <div class="logo">
                 <h1>CARROLL <span>& SONS</span> | ADMIN</h1>
             </div>
-            <div style="display: flex; align-items: center;">
+            <div class="user-info">
                 <div class="notification-bell" onclick="toggleNotifications()">
                     🔔
                     <span id="notificationBadge" class="badge" style="display: none;">0</span>
                 </div>
-                <div class="user-info">
-                    <span>Admin</span>
-                    <button onclick="logout()">LOGOUT</button>
-                </div>
+                <span style="font-size:0.9rem;">Admin</span>
+                <button onclick="logout()">LOGOUT</button>
             </div>
         </div>
     </nav>
@@ -122,22 +199,17 @@
     <div class="container">
         <div class="grid">
             <div>
-                <!-- ALL CLIENTS SECTION -->
                 <div class="card">
                     <h2>All Clients</h2>
                     <div id="clients"></div>
                 </div>
-                
-                <!-- ALL PROJECTS SECTION -->
                 <div class="card">
                     <h2>All Projects</h2>
                     <button class="btn-create" onclick="createProject()">+ New Project</button>
                     <div id="allProjects"></div>
                 </div>
             </div>
-            
             <div>
-                <!-- ALL MESSAGES SECTION -->
                 <div class="card">
                     <h2>All Messages</h2>
                     <div id="allMessages"></div>
@@ -162,14 +234,11 @@
                 .orderBy('timestamp', 'desc')
                 .limit(20)
                 .get();
-            
             const badge = document.getElementById('notificationBadge');
             const list = document.getElementById('notificationList');
-            
             if (!snapshot.empty) {
                 badge.style.display = 'inline';
                 badge.textContent = snapshot.size;
-                
                 list.innerHTML = '';
                 snapshot.forEach(doc => {
                     const n = doc.data();
@@ -198,18 +267,14 @@
         async function markAllRead() {
             const snapshot = await db.collection('notifications').where('read', '==', false).get();
             const batch = db.batch();
-            snapshot.forEach(doc => {
-                batch.update(doc.ref, { read: true });
-            });
+            snapshot.forEach(doc => batch.update(doc.ref, { read: true }));
             await batch.commit();
             loadNotifications();
         }
 
         // ========== LOGOUT ==========
         window.logout = function() {
-            auth.signOut().then(() => {
-                window.location.href = "index.html";
-            });
+            auth.signOut().then(() => window.location.href = "index.html");
         };
 
         // ========== LOAD ALL CLIENTS ==========
@@ -217,23 +282,20 @@
             const usersSnap = await db.collection('users').get();
             const clientsDiv = document.getElementById('clients');
             clientsDiv.innerHTML = '';
-            
             if (usersSnap.empty) {
                 clientsDiv.innerHTML = '<p>No clients yet.</p>';
                 return;
             }
-            
             usersSnap.forEach(doc => {
                 const user = doc.data();
                 const userId = doc.id;
                 const isAdmin = (user.email === 'carrollandsonspainting@gmail.com');
-                
                 clientsDiv.innerHTML += `
                     <div class="client-card" data-id="${userId}">
                         <div class="client-info">
                             <h4>${user.name}</h4>
                             <p>Email: ${user.email}</p>
-                            <p>Client ID: ${userId}</p>
+                            <p>ID: ${userId.substring(0,8)}…</p>
                         </div>
                         ${!isAdmin ? `<button class="delete-btn" onclick="deleteClient('${userId}', '${user.name}')">DELETE</button>` : ''}
                     </div>
@@ -241,35 +303,20 @@
             });
         }
 
-        // ========== DELETE CLIENT ==========
         window.deleteClient = async function(clientId, clientName) {
-            if (!confirm(`Delete ${clientName} and ALL their projects and messages? This cannot be undone.`)) {
-                return;
-            }
-            
+            if (!confirm(`Delete ${clientName} and ALL their projects and messages?`)) return;
             try {
                 const batch = db.batch();
-                
-                // Delete messages
                 const messagesSnap = await db.collection('messages').where('clientId', '==', clientId).get();
                 messagesSnap.forEach(doc => batch.delete(doc.ref));
-                
-                // Delete projects
                 const projectsSnap = await db.collection('projects').where('clientId', '==', clientId).get();
                 projectsSnap.forEach(doc => batch.delete(doc.ref));
-                
-                // Delete user document
                 batch.delete(db.collection('users').doc(clientId));
-                
                 await batch.commit();
-                
-                alert('Client and all associated data deleted');
-                loadAllClients();
-                loadAllProjects();
-                loadAllMessages();
-                
+                alert('Client deleted');
+                loadAllClients(); loadAllProjects(); loadAllMessages();
             } catch (error) {
-                console.error('Error deleting client:', error);
+                console.error(error);
                 alert('Error deleting client');
             }
         };
@@ -279,26 +326,22 @@
             const projectsSnap = await db.collection('projects').orderBy('createdAt', 'desc').get();
             const projectsDiv = document.getElementById('allProjects');
             projectsDiv.innerHTML = '';
-            
             if (projectsSnap.empty) {
                 projectsDiv.innerHTML = '<p>No projects yet.</p>';
                 return;
             }
-            
             const today = new Date().toISOString().split('T')[0];
-            
             projectsSnap.forEach(doc => {
                 const p = doc.data();
                 const projectId = doc.id;
-                const nextUpdate = p.nextUpdate || '';   // empty string if not set
-                
+                const nextUpdate = p.nextUpdate || '';
                 projectsDiv.innerHTML += `
                     <div class="project-card">
                         <div class="project-header">
                             <h4>${p.name}</h4>
                             <button class="delete-btn" onclick="deleteProject('${projectId}')">DELETE</button>
                         </div>
-                        <p>Client ID: ${p.clientId}</p>
+                        <p>Client ID: ${p.clientId.substring(0,8)}…</p>
                         <p>Status: <input type="text" value="${p.status || 'New'}" onchange="updateStatus('${projectId}', this.value)"></p>
                         <p>Next update: <input type="date" value="${nextUpdate}" min="${today}" onchange="updateNextUpdate('${projectId}', this.value)"></p>
                         <p class="help-text">Leave blank if no update scheduled</p>
@@ -307,7 +350,6 @@
             });
         }
 
-        // ========== DELETE PROJECT ==========
         window.deleteProject = async function(projectId) {
             if (!confirm('Delete this project?')) return;
             try {
@@ -315,23 +357,19 @@
                 alert('Project deleted');
                 loadAllProjects();
             } catch (error) {
-                console.error('Error deleting project:', error);
+                console.error(error);
                 alert('Error deleting project');
             }
         };
 
-        // ========== UPDATE PROJECT STATUS ==========
         window.updateStatus = async function(projectId, newStatus) {
             await db.collection('projects').doc(projectId).update({ status: newStatus });
             alert('Status updated');
         };
 
-        // ========== UPDATE NEXT UPDATE DATE (NO POPUP) ==========
         window.updateNextUpdate = async function(projectId, date) {
-            const value = date || '';   // if empty, store empty string
+            const value = date || '';
             await db.collection('projects').doc(projectId).update({ nextUpdate: value });
-            
-            // Optional: brief visual feedback
             const input = event.target;
             if (input) {
                 input.style.backgroundColor = '#d4edda';
@@ -339,57 +377,59 @@
             }
         };
 
-        // ========== LOAD ALL MESSAGES ==========
-        async function loadAllMessages() {
-            const msgsSnap = await db.collection('messages').orderBy('timestamp', 'desc').get();
-            const msgsDiv = document.getElementById('allMessages');
-            msgsDiv.innerHTML = '';
-            
-            if (msgsSnap.empty) {
-                msgsDiv.innerHTML = '<p>No messages yet.</p>';
-                return;
-            }
-            
-            msgsSnap.forEach(doc => {
-                const m = doc.data();
-                const msgId = doc.id;
-                const timestamp = m.timestamp ? new Date(m.timestamp.toDate()).toLocaleString() : 'Just now';
-                
-                msgsDiv.innerHTML += `
-                    <div class="message" id="msg-${msgId}">
-                        <div class="message-header">
-                            <strong>${m.clientName || 'Client'}:</strong>
-                            <button class="delete-btn" onclick="deleteMessage('${msgId}')">DELETE</button>
-                        </div>
-                        <p>${m.text}</p>
-                        <small>${timestamp}</small>
-                        <div class="reply-box">
-                            <textarea id="reply-${msgId}" placeholder="Type reply..." rows="2"></textarea>
-                            <button onclick="sendReply('${msgId}', '${m.clientId}')">Send Reply</button>
-                        </div>
-                    </div>
-                `;
-            });
+        // ========== REAL-TIME MESSAGES (LIVE UPDATES) ==========
+        let unsubscribeMessages = null;
+
+        function setupMessagesListener() {
+            if (unsubscribeMessages) unsubscribeMessages();
+            unsubscribeMessages = db.collection('messages')
+                .orderBy('timestamp', 'desc')
+                .onSnapshot(snapshot => {
+                    const msgsDiv = document.getElementById('allMessages');
+                    msgsDiv.innerHTML = '';
+                    if (snapshot.empty) {
+                        msgsDiv.innerHTML = '<p>No messages yet.</p>';
+                        return;
+                    }
+                    snapshot.forEach(doc => {
+                        const m = doc.data();
+                        const msgId = doc.id;
+                        const timestamp = m.timestamp ? new Date(m.timestamp.toDate()).toLocaleString() : 'Just now';
+                        msgsDiv.innerHTML += `
+                            <div class="message" id="msg-${msgId}">
+                                <div class="message-header">
+                                    <strong>${m.clientName || 'Client'}:</strong>
+                                    <button class="delete-btn" onclick="deleteMessage('${msgId}')">DELETE</button>
+                                </div>
+                                <p>${m.text}</p>
+                                <small>${timestamp}</small>
+                                <div class="reply-box">
+                                    <textarea id="reply-${msgId}" placeholder="Type reply..." rows="2"></textarea>
+                                    <button onclick="sendReply('${msgId}', '${m.clientId}')">Send Reply</button>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }, error => {
+                    console.error("Messages listener error:", error);
+                });
         }
 
-        // ========== DELETE MESSAGE ==========
         window.deleteMessage = async function(messageId) {
             if (!confirm('Delete this message?')) return;
             try {
                 await db.collection('messages').doc(messageId).delete();
                 alert('Message deleted');
-                loadAllMessages();
+                // Listener updates automatically
             } catch (error) {
-                console.error('Error deleting message:', error);
+                console.error(error);
                 alert('Error deleting message');
             }
         };
 
-        // ========== SEND REPLY ==========
         window.sendReply = async function(messageId, clientId) {
             const replyText = document.getElementById(`reply-${messageId}`).value;
             if (!replyText.trim()) return;
-            
             await db.collection('messages').add({
                 clientId: clientId,
                 text: replyText,
@@ -397,20 +437,17 @@
                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                 read: false
             });
-            
             document.getElementById(`reply-${messageId}`).value = '';
             alert('Reply sent');
-            loadAllMessages();
+            // Listener updates automatically
         };
 
         // ========== CREATE NEW PROJECT ==========
         window.createProject = async function() {
             const clientId = prompt('Enter client UID (from All Clients section):');
             if (!clientId) return;
-            
             const name = prompt('Project name:');
             if (!name) return;
-            
             try {
                 await db.collection('projects').add({
                     clientId: clientId,
@@ -421,7 +458,7 @@
                 });
                 loadAllProjects();
             } catch (error) {
-                console.error('Error creating project:', error);
+                console.error(error);
                 alert('Error creating project');
             }
         };
@@ -438,8 +475,8 @@
             }
             loadAllClients();
             loadAllProjects();
-            loadAllMessages();
             loadNotifications();
+            setupMessagesListener();   // <-- real-time messages
             setInterval(loadNotifications, 10000);
         });
 
